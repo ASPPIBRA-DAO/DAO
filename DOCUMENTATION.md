@@ -129,16 +129,20 @@ const ShareButton = ({ content }) => {
 }
 ```
 
-### 4.3. Guia de Decisão: Web vs. Nativo
+### 4.3. Guia de Arquitetura de Funcionalidades
 
-| Funcionalidade | Plataforma Principal | Estratégia de Arquitetura |
-| :--- | :--- | :--- |
-| **Login / Perfil / Feed** | **Compartilhada** | Crie telas e componentes únicos que funcionem em todas as plataformas. |
-| **Notificações Push** | **Nativo** | Use a API `Platform` para registrar o dispositivo apenas em iOS e Android. |
-| **Acesso à Câmera/QR Code** | **Nativo (Prioritário)** | Crie `QRScanner.native.tsx`. A versão web pode ter uma implementação alternativa ou um placeholder. |
-| **Landing Page / Blog** | **Web (Prioritário)** | Otimize para SEO. Pode-se criar um grupo de rotas exclusivo para a web, como `app/(web)/...` |
-| **Painel de Admin / Dashboards**| **Web** | Crie rotas específicas com `.web.tsx` para uma melhor experiência em telas grandes. |
-| **Funcionalidade Offline** | **Nativo** | Use a API `Platform` para ativar a lógica de armazenamento local apenas em iOS e Android. |
+Para facilitar as decisões de desenvolvimento, a tabela abaixo detalha as estratégias recomendadas para funcionalidades comuns e específicas de um DAO, seguindo a filosofia "compartilhe por padrão, especialize quando necessário".
+
+| Funcionalidade | Plataforma(s) | Estratégia de Arquitetura | Exemplo de Implementação / Bibliotecas |
+| :--- | :--- | :--- | :--- |
+| **Autenticação com Carteira** | Todas | **Nativa (Prioritária) / Web (Alternativa)** | **Nativo:** Use `WalletConnectModal` da `@walletconnect/modal-react-native`. **Web:** Use a biblioteca da WalletConnect para web. A diferença será abstraída em um hook como `useWalletAuth.native.ts` e `useWalletAuth.web.ts`. |
+| **Feed de Propostas** | Todas | **Compartilhada** | Crie um componente `ProposalList.tsx` e uma tela `app/(tabs)/proposals.tsx`. A busca de dados será feita em um hook compartilhado `useProposals.ts` que busca os dados de uma API ou serviço de indexação (e.g., The Graph). |
+| **Detalhe e Votação de Proposta** | Todas | **Compartilhada** | Tela única `app/proposal/[id].tsx` que funciona em todas as plataformas. A lógica de votação (`useVote.ts`) chamará a função de interação com o contrato inteligente. |
+| **Interação com Smart Contract** | Todas | **Compartilhada (com especificidade)** | Use bibliotecas como `ethers.js` ou `viem`. A lógica de criar um provedor (provider) e um assinante (signer) pode ter pequenas diferenças. Use a API `Platform` ou um hook `useContract.ts` para abstrair a conexão com a carteira de cada plataforma. |
+| **Notificações Push** | Nativo (iOS/Android) | **Específica (Nativo)** | Use o módulo `expo-notifications`. Envolva a lógica de registro e recebimento em um `if (Platform.OS !== 'web')` dentro de um hook `useNotifications.ts` que não faz nada na web. |
+| **Leitura de QR Code (WalletConnect)** | Nativo (Prioritário) | **Específica (Nativo)** | Use `expo-camera` para criar um componente `QRScanner.native.tsx`. A versão web (`QRScanner.web.tsx`) pode exibir uma mensagem instruindo o usuário a usar o celular ou copiar o link. |
+| **Dashboard de Governança** | Web (Prioritário) | **Específica (Web)** | Crie a rota `app/(web)/dashboard.tsx`. Use bibliotecas de gráficos como `recharts` que são otimizadas para web, criando componentes como `TreasuryChart.web.tsx`. A versão nativa pode ter uma visualização mais simples. |
+| **Cache de Dados (Offline)** | Nativo (iOS/Android) | **Específica (Nativo)** | Use **AsyncStorage** para guardar dados cacheados (propostas, perfis). A lógica de cache pode ser adicionada no hook `useProposals.ts`, ativada apenas se `Platform.OS !== 'web'`. |
 
 ### 4.4. Estendendo para Desktop Nativo (Windows & macOS)
 
