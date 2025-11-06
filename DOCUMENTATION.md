@@ -140,6 +140,51 @@ const ShareButton = ({ content }) => {
 | **Painel de Admin / Dashboards**| **Web** | Crie rotas específicas com `.web.tsx` para uma melhor experiência em telas grandes. |
 | **Funcionalidade Offline** | **Nativo** | Use a API `Platform` para ativar a lógica de armazenamento local apenas em iOS e Android. |
 
+### 4.4. Estendendo para Desktop Nativo (Windows & macOS)
+
+A arquitetura do projeto está pronta para ser compilada para aplicativos de desktop nativos, mas essa etapa final de compilação possui um requisito fundamental: **o processo de build deve ser executado no sistema operacional de destino.**
+
+- Para compilar um aplicativo `.exe` para **Windows**, você deve usar uma máquina **Windows** com as ferramentas de desenvolvimento da Microsoft instaladas (Visual Studio, etc.).
+- Para compilar um aplicativo `.app` para **macOS**, você deve usar uma máquina **macOS** com o Xcode instalado.
+
+O projeto já foi preparado para este passo (através do processo de "prebuild" ou "eject"). Para continuar, siga os passos no ambiente correspondente:
+
+#### No Ambiente Windows:
+
+1.  **Sincronize e Clone:** Certifique-se de ter a versão mais recente do projeto.
+2.  **Instale as Dependências:** Abra um terminal (PowerShell) e execute:
+    ```bash
+    npm install --legacy-peer-deps
+    ```
+3.  **Inicialize a Plataforma Windows:** Este comando cria a pasta `windows` com a solução do Visual Studio.
+    ```bash
+    npx react-native-windows-init --overwrite
+    ```
+4.  **Compile e Execute:**
+    ```bash
+    npx react-native run-windows
+    ```
+
+#### No Ambiente macOS:
+
+1.  **Sincronize e Clone:** Certifique-se de ter a versão mais recente do projeto.
+2.  **Instale as Dependências:**
+    ```bash
+    npm install --legacy-peer-deps
+    ```
+3.  **Adicione a Dependência do macOS:**
+    ```bash
+    npm install react-native-macos --legacy-peer-deps
+    ```
+4.  **Inicialize a Plataforma macOS:** Este comando cria a pasta `macos` com o projeto do Xcode.
+    ```bash
+    npx react-native-macos-init
+    ```
+5.  **Compile e Execute:**
+    ```bash
+    npx react-native run-macos
+    ```
+
 ---
 
 ## 5. Componentes e Estilização
