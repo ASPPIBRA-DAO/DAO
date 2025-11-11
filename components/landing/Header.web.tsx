@@ -1,16 +1,10 @@
 
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Pressable, useWindowDimensions, Modal } from 'react-native';
+import { Colors } from '@/constants/theme'; // Importa as cores centralizadas
 
-const COLORS = {
-  primary: '#007BFF',
-  white: '#FFFFFF',
-  darkText: '#343A40',
-  // Adicionando cores para o efeito de vidro
-  glassBackground: 'rgba(255, 255, 255, 0.8)',
-  glassBorder: 'rgba(255, 255, 255, 0.2)',
-  overlay: 'rgba(0, 0, 0, 0.5)', // Overlay um pouco mais claro
-};
+// Para simplificar, vamos usar o tema 'light' por enquanto.
+const theme = Colors.light;
 
 const Header = () => {
   const { width } = useWindowDimensions();
@@ -25,7 +19,7 @@ const Header = () => {
         <Text style={styles.navLink}>Propostas</Text>
         <Text style={styles.navLink}>Contato</Text>
       </View>
-      <Pressable style={styles.ctaButton}>
+      <Pressable style={styles.ctaButton} accessibilityLabel="Conectar Carteira" accessibilityRole="button">
         <Text style={styles.ctaButtonText}>Conectar Carteira</Text>
       </Pressable>
     </>
@@ -33,7 +27,7 @@ const Header = () => {
 
   const MobileNav = () => (
     <>
-      <Pressable onPress={() => setMenuOpen(true)} style={styles.hamburgerButton}>
+      <Pressable onPress={() => setMenuOpen(true)} style={styles.hamburgerButton} accessibilityLabel="Abrir menu de navegação" accessibilityRole="button">
         <Text style={styles.hamburgerIcon}>☰</Text>
       </Pressable>
       <Modal
@@ -42,16 +36,16 @@ const Header = () => {
         animationType="fade"
         onRequestClose={() => setMenuOpen(false)}
       >
-        <Pressable style={styles.overlay} onPress={() => setMenuOpen(false)}>
+        <Pressable style={styles.overlay} onPress={() => setMenuOpen(false)} accessibilityLabel="Fechar menu de navegação">
             <View style={styles.mobileMenuContainer}>
-                <Pressable onPress={() => setMenuOpen(false)} style={styles.closeButton}>
+                <Pressable onPress={() => setMenuOpen(false)} style={styles.closeButton} accessibilityLabel="Fechar menu">
                     <Text style={styles.closeButtonText}>×</Text>
                 </Pressable>
                 <Text style={styles.mobileNavLink} onPress={() => setMenuOpen(false)}>Início</Text>
                 <Text style={styles.mobileNavLink} onPress={() => setMenuOpen(false)}>Sobre</Text>
                 <Text style={styles.mobileNavLink} onPress={() => setMenuOpen(false)}>Propostas</Text>
                 <Text style={styles.mobileNavLink} onPress={() => setMenuOpen(false)}>Contato</Text>
-                 <Pressable style={[styles.ctaButton, { marginTop: 30 }]}>
+                 <Pressable style={[styles.ctaButton, { marginTop: 30 }]} accessibilityLabel="Conectar Carteira" accessibilityRole="button">
                     <Text style={styles.ctaButtonText}>Conectar Carteira</Text>
                 </Pressable>
             </View>
@@ -73,14 +67,13 @@ const Header = () => {
 const styles = StyleSheet.create({
   headerContainer: {
     width: '100%',
-    position: 'fixed', // Fixo no topo
+    // @ts-ignore - position sticky é específico para web
+    position: 'sticky',
     top: 0,
-    left: 0,
-    right: 0,
     zIndex: 1000,
-    backgroundColor: COLORS.glassBackground, // Fundo de vidro
+    backgroundColor: theme.header.background, // Cor do tema
     borderBottomWidth: 1,
-    borderColor: COLORS.glassBorder, // Borda de vidro
+    borderColor: theme.header.border, // Cor do tema
     alignItems: 'center',
     paddingVertical: 10,
     // @ts-ignore - backdropFilter é uma propriedade web
@@ -97,7 +90,7 @@ const styles = StyleSheet.create({
   logo: {
     fontSize: 26,
     fontWeight: 'bold',
-    color: COLORS.darkText,
+    color: theme.textSecondary, // Cor do tema
   },
   navContainer: {
     flexDirection: 'row',
@@ -105,17 +98,17 @@ const styles = StyleSheet.create({
   },
   navLink: {
     fontSize: 16,
-    color: COLORS.darkText,
+    color: theme.textSecondary, // Cor do tema
     fontWeight: '500',
   },
   ctaButton: {
-    backgroundColor: COLORS.primary,
+    backgroundColor: theme.primary, // Cor do tema
     paddingVertical: 12,
     paddingHorizontal: 24,
     borderRadius: 8,
   },
   ctaButtonText: {
-    color: COLORS.white,
+    color: Colors.light.background, // Cor do tema (Branco)
     fontSize: 16,
     fontWeight: 'bold',
   },
@@ -124,16 +117,16 @@ const styles = StyleSheet.create({
   },
   hamburgerIcon: {
       fontSize: 24,
-      color: COLORS.darkText,
+      color: theme.textSecondary, // Cor do tema
   },
   overlay: {
     flex: 1,
-    backgroundColor: COLORS.overlay,
+    backgroundColor: theme.overlay, // Cor do tema
     justifyContent: 'flex-start',
     alignItems: 'flex-end',
   },
   mobileMenuContainer: {
-    backgroundColor: 'rgba(255, 255, 255, 0.9)', // Fundo de vidro mais opaco
+    backgroundColor: theme.mobileMenu.background, // Cor do tema
     width: '80%',
     height: '100%',
     padding: 40,
@@ -146,11 +139,11 @@ const styles = StyleSheet.create({
   },
   closeButtonText: {
       fontSize: 30,
-      color: COLORS.darkText,
+      color: theme.textSecondary, // Cor do tema
   },
   mobileNavLink: {
     fontSize: 22,
-    color: COLORS.darkText,
+    color: theme.textSecondary, // Cor do tema
     fontWeight: 'bold',
     marginBottom: 30,
   },

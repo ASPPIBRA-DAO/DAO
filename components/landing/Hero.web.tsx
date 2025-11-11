@@ -1,20 +1,16 @@
 
 import React from 'react';
 import { View, Text, StyleSheet, Pressable, useWindowDimensions } from 'react-native';
+import { Colors } from '@/constants/theme'; // Importa as cores centralizadas
 
-const COLORS = {
-  primary: '#6A4CFF', // A vibrant purple for the main CTA
-  darkText: '#333333',
-  lightText: '#555555',
-  white: '#FFFFFF',
-  borderColor: '#E0E0E0',
-};
+// Para simplificar, vamos usar o tema 'light' por enquanto.
+const theme = Colors.light;
 
 const Hero = () => {
   const { width } = useWindowDimensions();
   const isMobile = width < 768;
 
-  const titleFontSize = isMobile ? 32 : 56; // Ajusta o tamanho da fonte para mobile
+  const titleFontSize = isMobile ? 32 : 56;
 
   return (
     <View style={styles.heroContainer}>
@@ -34,42 +30,42 @@ const styles = StyleSheet.create({
   heroContainer: {
     paddingVertical: 80,
     alignItems: 'center',
-    backgroundColor: COLORS.white,
+    backgroundColor: theme.background, // Cor do tema
     paddingHorizontal: 20,
   },
   eyebrow: {
     fontSize: 14,
     fontWeight: 'bold',
-    color: COLORS.primary,
+    color: theme.primaryAlt, // Cor do tema (Roxo)
     textTransform: 'uppercase',
     letterSpacing: 1.5,
     marginBottom: 16,
   },
   title: {
     fontWeight: 'bold',
-    color: COLORS.darkText,
+    color: theme.textSecondary, // Cor do tema
     textAlign: 'center',
     maxWidth: 800,
     marginBottom: 24,
   },
   subtitle: {
     fontSize: 18,
-    color: COLORS.lightText,
+    color: theme.textTertiary, // Cor do tema
     textAlign: 'center',
     lineHeight: 28,
     maxWidth: 650,
     marginBottom: 32,
   },
   ctaButton: {
-    backgroundColor: COLORS.white,
+    backgroundColor: theme.background, // Cor do tema (Branco)
     paddingVertical: 14,
     paddingHorizontal: 28,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: COLORS.borderColor,
+    borderColor: theme.border, // Cor do tema
   },
   ctaButtonText: {
-    color: COLORS.darkText,
+    color: theme.textSecondary, // Cor do tema
     fontSize: 16,
     fontWeight: 'bold',
   },

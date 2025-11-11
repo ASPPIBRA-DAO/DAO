@@ -1,25 +1,18 @@
 
 import React from 'react';
 import { View, Text, StyleSheet, useWindowDimensions, Image } from 'react-native';
+import { Colors } from '@/constants/theme'; // Importa as cores centralizadas
 
-const COLORS = {
-  primary: '#6A4CFF',
-  darkText: '#333333',
-  lightText: '#555555',
-  white: '#FFFFFF',
-  cardBorder: '#E0E0E0',
-  cardBackground: '#FFFFFF',
-  blueCardBackground: '#E9EFFF',
-  darkCardBackground: '#1A1A1A',
-};
+// Para simplificar, vamos usar o tema 'light' por enquanto.
+const theme = Colors.light;
 
 // Placeholder Card Component
 const EcosystemCard = ({ style, cardColor, title, text, image, isDark }) => (
   <View style={[styles.card, { backgroundColor: cardColor }, style]}>
     {image && <Image source={{ uri: image }} style={styles.cardImage} />}
-    <Text style={[styles.cardTitle, isDark && { color: COLORS.white }]}>{title}</Text>
-    <Text style={[styles.cardText, isDark && { color: COLORS.lightText }]}>{text}</Text>
-    <Text style={[styles.cardLink, isDark && { color: COLORS.white }]}>Leia mais →</Text>
+    <Text style={[styles.cardTitle, isDark && { color: theme.card.text }]}>{title}</Text>
+    <Text style={[styles.cardText, isDark && { color: theme.textTertiary }]}>{text}</Text>
+    <Text style={[styles.cardLink, isDark && { color: theme.card.text }]}>Leia mais →</Text>
   </View>
 );
 
@@ -35,7 +28,7 @@ const Ecosystem = () => {
           <EcosystemCard 
             title="Lançamento Evergan v0.14"
             text="O Evergan v0.14 da Nexera é uma otimização de alta performance para dispositivos móveis, com página segura para relayers, acesso a help desk e um item avançado NRC-20 atualizável com o padrão ERC-20."
-            cardColor={COLORS.darkCardBackground}
+            cardColor={theme.card.backgroundDark}
             image="https://placehold.co/600x400/1A1A1A/FFFFFF?text=Evergan"
             isDark
           />
@@ -46,7 +39,7 @@ const Ecosystem = () => {
           <EcosystemCard 
             title="Indexação Completa e Relatórios"
             text="O Evergan v0.13 possui indexação completa on-chain, recuperação de forma livre, relatórios de minting sem gás e cargas de trabalho auditadas para maior transparência e segurança."
-            cardColor={COLORS.darkCardBackground}
+            cardColor={theme.card.backgroundDark}
             isDark
           />
         </View>
@@ -84,7 +77,7 @@ const styles = StyleSheet.create({
     padding: 28,
     height: '100%',
     borderWidth: 1,
-    borderColor: COLORS.cardBorder,
+    borderColor: theme.border,
   },
   cardImage: {
     height: 200,
@@ -94,19 +87,19 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: COLORS.darkText,
+    color: theme.textSecondary,
     marginBottom: 12,
   },
   cardText: {
     fontSize: 16,
     lineHeight: 24,
-    color: COLORS.lightText,
+    color: theme.textTertiary,
     marginBottom: 20,
   },
   cardLink: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: COLORS.darkText,
+    color: theme.textSecondary,
     marginTop: 'auto',
   },
 });

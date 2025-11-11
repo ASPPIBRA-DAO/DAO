@@ -1,23 +1,25 @@
 
 import React from 'react';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient'; // Assuming expo-linear-gradient is installed
+import { View, Text, StyleSheet, Pressable, useWindowDimensions } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { Colors } from '@/constants/theme'; // Importa as cores centralizadas
 
-const COLORS = {
-  primary: '#6A4CFF',
-  white: '#FFFFFF',
-  darkText: '#333333',
-  lightText: '#F0F2F5',
-};
+// Para simplificar, vamos usar o tema 'light' por enquanto.
+const theme = Colors.light;
 
 const FinalCTA = () => {
+  const { width } = useWindowDimensions();
+  const isMobile = width < 768;
+
+  const titleFontSize = isMobile ? 36 : 48;
+
   return (
     <View style={styles.outerContainer}>
       <LinearGradient
-        colors={['#F2F4FF', '#E6E9FF']}
+        colors={theme.gradient.cta} // Cor do tema
         style={styles.container}
       >
-        <Text style={styles.title}>Construa o futuro com a Nexera</Text>
+        <Text style={[styles.title, { fontSize: titleFontSize }]}>Construa o futuro com a Nexera</Text>
         <Text style={styles.subtitle}>
           Construa sua visão com a infraestrutura poderosa da Nexera, interoperabilidade perfeita e soluções prontas para conformidade.
         </Text>
@@ -37,7 +39,7 @@ const styles = StyleSheet.create({
   },
   container: {
     width: '100%',
-    maxWidth: 1160, // max-width of the inner container
+    maxWidth: 1160,
     alignItems: 'center',
     justifyContent: 'center',
     padding: 60,
@@ -46,29 +48,28 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   title: {
-    fontSize: 48,
     fontWeight: 'bold',
-    color: COLORS.darkText,
+    color: theme.textSecondary, // Cor do tema
     textAlign: 'center',
     maxWidth: 600,
     marginBottom: 24,
   },
   subtitle: {
     fontSize: 18,
-    color: '#555',
+    color: theme.textTertiary, // Cor do tema
     textAlign: 'center',
     lineHeight: 28,
     maxWidth: 650,
     marginBottom: 32,
   },
   ctaButton: {
-    backgroundColor: COLORS.primary,
+    backgroundColor: theme.primaryAlt, // Cor do tema (Roxo)
     paddingVertical: 14,
     paddingHorizontal: 28,
     borderRadius: 8,
   },
   ctaButtonText: {
-    color: COLORS.white,
+    color: theme.textOnPrimary, // Cor do tema (Branco)
     fontSize: 16,
     fontWeight: 'bold',
   },
