@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { View, Text, StyleSheet, Pressable, useWindowDimensions } from 'react-native';
 
 const COLORS = {
   primary: '#6A4CFF', // A vibrant purple for the main CTA
@@ -11,12 +11,17 @@ const COLORS = {
 };
 
 const Hero = () => {
+  const { width } = useWindowDimensions();
+  const isMobile = width < 768;
+
+  const titleFontSize = isMobile ? 32 : 56; // Ajusta o tamanho da fonte para mobile
+
   return (
     <View style={styles.heroContainer}>
       <Text style={styles.eyebrow}>ECOSSISTEMA</Text>
-      <Text style={styles.title}>Impulsionando um ecossistema dinâmico e em crescimento</Text>
+      <Text style={[styles.title, { fontSize: titleFontSize }]}>Impulsionando um ecossistema dinâmico e em crescimento</Text>
       <Text style={styles.subtitle}>
-        A Nexera Chain potencializa um ecossistema próspero, conectando empresas, instituições e desenvolvedores para criar o futuro das aplicações baseadas em blockchain.
+        A ASPPIBRA-DAO potencializa um ecossistema próspero, conectando empresas, instituições e desenvolvedores para criar o futuro das aplicações baseadas em blockchain.
       </Text>
       <Pressable style={styles.ctaButton}>
         <Text style={styles.ctaButtonText}>Explorar ecossistema</Text>
@@ -41,7 +46,6 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   title: {
-    fontSize: 56,
     fontWeight: 'bold',
     color: COLORS.darkText,
     textAlign: 'center',

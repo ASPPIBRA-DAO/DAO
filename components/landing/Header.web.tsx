@@ -1,28 +1,68 @@
 
-import React from 'react';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, Pressable, useWindowDimensions, Modal } from 'react-native';
 
 const COLORS = {
-  primary: '#007BFF', // Um azul para diferenciar da versão nativa
+  primary: '#007BFF',
   white: '#FFFFFF',
   darkText: '#343A40',
   borderColor: '#DEE2E6',
+  overlay: 'rgba(0, 0, 0, 0.8)', // Fundo para o menu mobile
 };
 
 const Header = () => {
+  const { width } = useWindowDimensions();
+  const isMobile = width < 768;
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const DesktopNav = () => (
+    <>
+      <View style={styles.navContainer}>
+        <Text style={styles.navLink}>Início</Text>
+        <Text style={styles.navLink}>Sobre</Text>
+        <Text style={styles.navLink}>Propostas</Text>
+        <Text style={styles.navLink}>Contato</Text>
+      </View>
+      <Pressable style={styles.ctaButton}>
+        <Text style={styles.ctaButtonText}>Conectar Carteira</Text>
+      </Pressable>
+    </>
+  );
+
+  const MobileNav = () => (
+    <>
+      <Pressable onPress={() => setMenuOpen(true)} style={styles.hamburgerButton}>
+        <Text style={styles.hamburgerIcon}>☰</Text>
+      </Pressable>
+      <Modal
+        transparent={true}
+        visible={menuOpen}
+        animationType="fade"
+        onRequestClose={() => setMenuOpen(false)}
+      >
+        <Pressable style={styles.overlay} onPress={() => setMenuOpen(false)}>
+            <View style={styles.mobileMenuContainer}>
+                <Pressable onPress={() => setMenuOpen(false)} style={styles.closeButton}>
+                    <Text style={styles.closeButtonText}>×</Text>
+                </Pressable>
+                <Text style={styles.mobileNavLink} onPress={() => setMenuOpen(false)}>Início</Text>
+                <Text style={styles.mobileNavLink} onPress={() => setMenuOpen(false)}>Sobre</Text>
+                <Text style={styles.mobileNavLink} onPress={() => setMenuOpen(false)}>Propostas</Text>
+                <Text style={styles.mobileNavLink} onPress={() => setMenuOpen(false)}>Contato</Text>
+                 <Pressable style={[styles.ctaButton, { marginTop: 30 }]}>
+                    <Text style={styles.ctaButtonText}>Conectar Carteira</Text>
+                </Pressable>
+            </View>
+        </Pressable>
+      </Modal>
+    </>
+  );
+
   return (
     <View style={styles.headerContainer}>
       <View style={styles.headerContent}>
         <Text style={styles.logo}>ASPPIBRA-DAO</Text>
-        <View style={styles.navContainer}>
-          <Text style={styles.navLink}>Início</Text>
-          <Text style={styles.navLink}>Sobre</Text>
-          <Text style={styles.navLink}>Propostas</Text>
-          <Text style={styles.navLink}>Contato</Text>
-        </View>
-        <Pressable style={styles.ctaButton}>
-          <Text style={styles.ctaButtonText}>Conectar Carteira</Text>
-        </Pressable>
+        {isMobile ? <MobileNav /> : <DesktopNav />}
       </View>
     </View>
   );
@@ -50,6 +90,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: COLORS.darkText,
   },
+  // Estilos Desktop
   navContainer: {
     flexDirection: 'row',
     gap: 40,
@@ -69,6 +110,40 @@ const styles = StyleSheet.create({
     color: COLORS.white,
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  // Estilos Mobile
+  hamburgerButton: {
+      padding: 10,
+  },
+  hamburgerIcon: {
+      fontSize: 24,
+      color: COLORS.darkText,
+  },
+  overlay: {
+    flex: 1,
+    backgroundColor: COLORS.overlay,
+    justifyContent: 'flex-start',
+    alignItems: 'flex-end',
+  },
+  mobileMenuContainer: {
+    backgroundColor: COLORS.white,
+    width: '80%',
+    height: '100%',
+    padding: 40,
+  },
+  closeButton: {
+      alignSelf: 'flex-end',
+      marginBottom: 30,
+  },
+  closeButtonText: {
+      fontSize: 30,
+      color: COLORS.darkText,
+  },
+  mobileNavLink: {
+    fontSize: 22,
+    color: COLORS.darkText,
+    fontWeight: 'bold',
+    marginBottom: 30,
   },
 });
 
