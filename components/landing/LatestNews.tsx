@@ -14,27 +14,27 @@ const COLORS = {
 
 const newsItems = [
   {
-    tag: 'Product',
-    title: 'Nexera x Evergon Release v0.14: Mobile Readiness,...',
-    image: 'https://placehold.co/400x250/FFC107/FFFFFF?text=News+1',
+    tag: 'Produto',
+    title: 'Nexera x Evergon Lançamento v0.14: Prontidão para Dispositivos Móveis,...',
+    image: 'https://placehold.co/400x250/FFC107/FFFFFF?text=Notícia+1',
     link: '#',
   },
   {
-    tag: 'Product',
-    title: 'Nexera x Evergon Release v0.13: Full Indexation, Fractio...',
-    image: 'https://placehold.co/400x250/F44336/FFFFFF?text=News+2',
+    tag: 'Produto',
+    title: 'Nexera x Evergon Lançamento v0.13: Indexação Completa, Fractio...',
+    image: 'https://placehold.co/400x250/F44336/FFFFFF?text=Notícia+2',
     link: '#',
   },
   {
-    tag: 'Partnership',
-    title: 'Nexera and GraphAI Partner to Bring Offchain AI Queries...',
-    image: 'https://placehold.co/400x250/2196F3/FFFFFF?text=News+3',
+    tag: 'Parceria',
+    title: 'Nexera e GraphAI se unem para trazer consultas de IA Offchain...',
+    image: 'https://placehold.co/400x250/2196F3/FFFFFF?text=Notícia+3',
     link: '#',
   },
   {
-    tag: 'Announcement',
-    title: 'Nexera Chain Mainnet Soft Launch Is Now Live',
-    image: 'https://placehold.co/400x250/9C27B0/FFFFFF?text=News+4',
+    tag: 'Anúncio',
+    title: 'Lançamento Suave da Mainnet da Nexera Chain Já Disponível',
+    image: 'https://placehold.co/400x250/9C27B0/FFFFFF?text=Notícia+4',
     link: '#',
   },
 ];
@@ -45,7 +45,7 @@ const NewsCard = ({ item }) => (
     <View style={styles.cardContent}>
       <Text style={styles.cardTag}>{item.tag}</Text>
       <Text style={styles.cardTitle}>{item.title}</Text>
-      <Text style={styles.cardLink}>Read more →</Text>
+      <Text style={styles.cardLink}>Leia mais →</Text>
     </View>
   </View>
 );
@@ -56,7 +56,7 @@ const LatestNews = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Latest News</Text>
+      <Text style={styles.title}>Últimas Notícias</Text>
       
       {/* TODO: Add filter buttons */}
       

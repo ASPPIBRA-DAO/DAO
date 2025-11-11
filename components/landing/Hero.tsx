@@ -13,13 +13,13 @@ const COLORS = {
 const Hero = () => {
   return (
     <View style={styles.heroContainer}>
-      <Text style={styles.eyebrow}>ECOSYSTEM</Text>
-      <Text style={styles.title}>Driving a dynamic and growing ecosystem</Text>
+      <Text style={styles.eyebrow}>ECOSSISTEMA</Text>
+      <Text style={styles.title}>Impulsionando um ecossistema dinâmico e em crescimento</Text>
       <Text style={styles.subtitle}>
-        Nexera Chain powers a thriving ecosystem, connecting businesses, institutions, and developers to create the future of blockchain-powered applications.
+        A Nexera Chain potencializa um ecossistema próspero, conectando empresas, instituições e desenvolvedores para criar o futuro das aplicações baseadas em blockchain.
       </Text>
       <Pressable style={styles.ctaButton}>
-        <Text style={styles.ctaButtonText}>Explore ecosystem</Text>
+        <Text style={styles.ctaButtonText}>Explorar ecossistema</Text>
       </Pressable>
     </View>
   );

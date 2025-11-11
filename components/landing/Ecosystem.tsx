@@ -19,7 +19,7 @@ const EcosystemCard = ({ style, cardColor, title, text, image, isDark }) => (
     {image && <Image source={{ uri: image }} style={styles.cardImage} />}
     <Text style={[styles.cardTitle, isDark && { color: COLORS.white }]}>{title}</Text>
     <Text style={[styles.cardText, isDark && { color: COLORS.lightText }]}>{text}</Text>
-    <Text style={[styles.cardLink, isDark && { color: COLORS.white }]}>Read more →</Text>
+    <Text style={[styles.cardLink, isDark && { color: COLORS.white }]}>Leia mais →</Text>
   </View>
 );
 
@@ -33,26 +33,21 @@ const Ecosystem = () => {
         {/* Coluna da Esquerda (Card Grande) */}
         <View style={styles.leftColumn}>
           <EcosystemCard 
-            title="Evergan v0.14 Release"
-            text="Nexera's Evergan v0.14 is a high-mobile optimization, relayer safe page, help desk access, and an upgradeable NRC-20 Adance Item with the ERC-20 standard."
+            title="Lançamento Evergan v0.14"
+            text="O Evergan v0.14 da Nexera é uma otimização de alta performance para dispositivos móveis, com página segura para relayers, acesso a help desk e um item avançado NRC-20 atualizável com o padrão ERC-20."
             cardColor={COLORS.darkCardBackground}
             image="https://placehold.co/600x400/1A1A1A/FFFFFF?text=Evergan"
             isDark
           />
         </View>
 
-        {/* Coluna da Direita (2 Cards Pequenos) */}
+        {/* Coluna da Direita (Card Pequeno) */}
         <View style={styles.rightColumn}>
           <EcosystemCard 
-            title="Full Indexation & Reports"
-            text="Evergan v0.13 has full on-chain indexation, free-form recovery, gas-free minting reports, and audited workloads for greater transparency and security."
+            title="Indexação Completa e Relatórios"
+            text="O Evergan v0.13 possui indexação completa on-chain, recuperação de forma livre, relatórios de minting sem gás e cargas de trabalho auditadas para maior transparência e segurança."
             cardColor={COLORS.darkCardBackground}
             isDark
-          />
-          <EcosystemCard 
-            title="GraphAI Integration"
-            text="GraphAI and Nexera unlock query mining by turning AI-driven natural language queries into on-chain verifiable results using the NRC-720B standard."
-            cardColor={COLORS.blueCardBackground}
           />
         </View>
       </View>
@@ -117,4 +112,3 @@ const styles = StyleSheet.create({
 });
 
 export default Ecosystem;
-

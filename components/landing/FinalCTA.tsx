@@ -17,12 +17,12 @@ const FinalCTA = () => {
         colors={['#F2F4FF', '#E6E9FF']}
         style={styles.container}
       >
-        <Text style={styles.title}>Build the future with Nexera</Text>
+        <Text style={styles.title}>Construa o futuro com a Nexera</Text>
         <Text style={styles.subtitle}>
-          Build your vision with Nexera's powerful infrastructure, seamless interoperability, and compliance-ready solutions.
+          Construa sua visão com a infraestrutura poderosa da Nexera, interoperabilidade perfeita e soluções prontas para conformidade.
         </Text>
         <Pressable style={styles.ctaButton}>
-          <Text style={styles.ctaButtonText}>Let's Build</Text>
+          <Text style={styles.ctaButtonText}>Vamos Construir</Text>
         </Pressable>
       </LinearGradient>
     </View>

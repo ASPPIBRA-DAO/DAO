@@ -13,9 +13,9 @@ const Header = () => {
   return (
     <View style={styles.headerContainer}>
       <View style={styles.headerContent}>
-        <Text style={styles.logo}>nexera (Web)</Text>
+        <Text style={styles.logo}>ASPPIBRA-DAO</Text>
         <View style={styles.navContainer}>
-          <Text style={styles.navLink}>Home</Text>
+          <Text style={styles.navLink}>Início</Text>
           <Text style={styles.navLink}>Sobre</Text>
           <Text style={styles.navLink}>Propostas</Text>
           <Text style={styles.navLink}>Contato</Text>

@@ -30,20 +30,20 @@ const Community = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.eyebrow}>COMMUNITY</Text>
-      <Text style={styles.title}>A community shaping the future, together</Text>
+      <Text style={styles.eyebrow}>COMUNIDADE</Text>
+      <Text style={styles.title}>Uma comunidade moldando o futuro, juntos</Text>
       <Text style={styles.subtitle}>
-        Builders, investors, and contributors are driving blockchain innovation on Nexera Chain. Join the conversation, share ideas, and participate in governance.
+        Construtores, investidores e contribuidores estão impulsionando a inovação em blockchain na Nexera Chain. Junte-se à conversa, compartilhe ideias e participe da governança.
       </Text>
       <Pressable style={styles.ctaButton}>
-        <Text style={styles.ctaButtonText}>Join our communities</Text>
+        <Text style={styles.ctaButtonText}>Junte-se às nossas comunidades</Text>
       </Pressable>
 
       <View style={[styles.cardGrid, !isDesktop && styles.cardGridMobile]}>
-        <CommunityCard icon="X" name="Nexera Official" members="40,000+ followers" color={COLORS.lightBlue} />
-        <CommunityCard icon="B" name="Nexera Foundation" members="20,000+ members" color={COLORS.lightOrange} />
-        <CommunityCard icon="C" name="Nexera Community" members="10,000+ members" color={COLORS.lightGreen} />
-        <CommunityCard icon="in" name="Nexera Foundation" members="5,000+ connections" color={COLORS.lightPink} />
+        <CommunityCard icon="X" name="Nexera Oficial" members="40.000+ seguidores" color={COLORS.lightBlue} />
+        <CommunityCard icon="B" name="Fundação Nexera" members="20.000+ membros" color={COLORS.lightOrange} />
+        <CommunityCard icon="C" name="Comunidade Nexera" members="10.000+ membros" color={COLORS.lightGreen} />
+        <CommunityCard icon="in" name="Fundação Nexera" members="5.000+ conexões" color={COLORS.lightPink} />
       </View>
     </View>
   );

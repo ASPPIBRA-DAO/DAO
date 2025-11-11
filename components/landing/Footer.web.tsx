@@ -13,7 +13,7 @@ const Footer = () => {
   return (
     <View style={styles.footerContainer}>
       <View style={styles.footerContent}>
-        <Text style={styles.footerText}>© 2024 nexera. Todos os direitos reservados.</Text>
+        <Text style={styles.footerText}>© 2024 ASPPIBRA-DAO. Todos os direitos reservados.</Text>
         <View style={styles.footerLinks}>
           <Text style={styles.link}>Termos de Serviço</Text>
           <Text style={styles.link}>Política de Privacidade</Text>
