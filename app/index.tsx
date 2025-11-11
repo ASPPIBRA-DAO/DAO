@@ -13,34 +13,20 @@ const COLORS = {
   background: '#FFFFFF',
 };
 
+// Um wrapper para facilitar a aplicação do estilo de snap
+const SnapSection = ({ children }) => <View style={styles.snapSection}>{children}</View>;
+
 export default function WebHomeScreen() {
   return (
     <View style={styles.container}>
-      {/* O Header agora está fora do ScrollView para ficar fixo no topo */}
       <Header />
-
-      {/* O ScrollView contém todo o conteúdo que pode ser rolado */}
-      <ScrollView>
-        {/* Um container para o conteúdo principal com padding no topo */}
-        <View style={styles.content}>
-          {/* The hero section with the main title */}
-          <Hero />
-
-          {/* A seção de ecossistema com os cards */}
-          <Ecosystem />
-
-          {/* A seção da comunidade */}
-          <Community />
-
-          {/* A seção de últimas notícias */}
-          <LatestNews />
-
-          {/* A seção final de CTA */}
-          <FinalCTA />
-        </View>
-
-        {/* O novo rodapé */}
-        <Footer />
+      <ScrollView style={styles.scrollContainer}>
+        <SnapSection><Hero /></SnapSection>
+        <SnapSection><Ecosystem /></SnapSection>
+        <SnapSection><Community /></SnapSection>
+        <SnapSection><LatestNews /></SnapSection>
+        <SnapSection><FinalCTA /></SnapSection>
+        <SnapSection><Footer /></SnapSection>
       </ScrollView>
     </View>
   );
@@ -51,9 +37,20 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.background,
   },
-  content: {
-    alignItems: 'center',
-    backgroundColor: COLORS.background,
-    paddingTop: 80, // Espaço para não sobrepor o conteúdo pelo Header
+  // Estilos para o Scroll Snap
+  scrollContainer: {
+    // @ts-ignore - Propriedades web para scroll snap
+    scrollSnapType: 'y mandatory',
+    scrollPaddingTop: 80, // Garante que o header não sobreponha a seção
+  },
+  snapSection: {
+    // @ts-ignore - Propriedades web para scroll snap
+    scrollSnapAlign: 'start',
+    width: '100%',
+    // As seções precisam de uma altura definida para o snap funcionar corretamente.
+    // Usamos minHeight para garantir que seções maiores não sejam cortadas.
+    minHeight: '100vh', 
+    justifyContent: 'center', // Centraliza o conteúdo da seção verticalmente
+    alignItems: 'center', // Centraliza o conteúdo da seção horizontalmente
   },
 });
