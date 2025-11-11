@@ -8,16 +8,12 @@ const COLORS = {
   lightText: '#555555',
   white: '#FFFFFF',
   borderColor: '#E0E0E0',
-  // Card specific colors from the design
-  lightBlue: '#E3F2FD',
-  lightOrange: '#FFE0B2',
-  lightGreen: '#D7FFD9',
-  lightPink: '#FCE4EC',
+  cardBackground: '#F5F5F5', // Standardized card color
 };
 
-// Placeholder for community cards
-const CommunityCard = ({ icon, name, members, color }) => (
-  <View style={[styles.communityCard, { backgroundColor: color }]}>
+// Community Card Component
+const CommunityCard = ({ icon, name, members }) => (
+  <View style={styles.communityCard}>
     <Text style={styles.cardIcon}>{icon}</Text>
     <Text style={styles.cardName}>{name}</Text>
     <Text style={styles.cardMembers}>{members}</Text>
@@ -40,10 +36,10 @@ const Community = () => {
       </Pressable>
 
       <View style={[styles.cardGrid, !isDesktop && styles.cardGridMobile]}>
-        <CommunityCard icon="X" name="Nexera Official" members="40,000+ followers" color={COLORS.lightBlue} />
-        <CommunityCard icon="B" name="Nexera Foundation" members="20,000+ members" color={COLORS.lightOrange} />
-        <CommunityCard icon="C" name="Nexera Community" members="10,000+ members" color={COLORS.lightGreen} />
-        <CommunityCard icon="in" name="Nexera Foundation" members="5,000+ connections" color={COLORS.lightPink} />
+        <CommunityCard icon="X" name="Nexera Official" members="40,000+ followers" />
+        <CommunityCard icon="B" name="Nexera Foundation" members="20,000+ members" />
+        <CommunityCard icon="C" name="Nexera Community" members="10,000+ members" />
+        <CommunityCard icon="in" name="Nexera Foundation" members="5,000+ connections" />
       </View>
     </View>
   );
@@ -60,7 +56,7 @@ const styles = StyleSheet.create({
   eyebrow: {
     fontSize: 14,
     fontWeight: 'bold',
-    color: '#888',
+    color: COLORS.primary, // Standardized color
     textTransform: 'uppercase',
     letterSpacing: 1.5,
     marginBottom: 16,
@@ -108,11 +104,15 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     padding: 24,
     height: 180,
+    backgroundColor: COLORS.cardBackground, // Standardized background
+    borderWidth: 1,
+    borderColor: COLORS.borderColor,
   },
   cardIcon: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 16,
+    color: COLORS.primary, // Themed icon color
   },
   cardName: {
     fontSize: 18,

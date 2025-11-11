@@ -1,10 +1,9 @@
 
 import React from 'react';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { View, Text, StyleSheet, Pressable, useWindowDimensions } from 'react-native';
 
 const COLORS = {
-  primary: '#6A4CFF', // A vibrant purple for the main CTA
-  lightGray: '#F0F2F5',
+  primary: '#6A4CFF',
   darkText: '#333333',
   lightText: '#555555',
   white: '#FFFFFF',
@@ -12,22 +11,35 @@ const COLORS = {
 };
 
 const Header = () => {
+  const { width } = useWindowDimensions();
+  const isDesktop = width > 992;
+
   return (
     <View style={styles.headerContainer}>
       <View style={styles.headerContent}>
         <View style={styles.logoContainer}>
           <Text style={styles.logo}>nexera</Text>
         </View>
-        <View style={styles.navContainer}>
-          <Text style={styles.navLink}>Builder</Text>
-          <Text style={styles.navLink}>Business</Text>
-          <Text style={styles.navLink}>Community</Text>
-          <Text style={styles.navLink}>Ecosystem</Text>
-          <Text style={styles.navLink}>Resources</Text>
-        </View>
-        <Pressable style={styles.ctaButton}>
-          <Text style={styles.ctaButtonText}>Let's build</Text>
-        </Pressable>
+
+        {isDesktop ? (
+          <>
+            <View style={styles.navContainer}>
+              <Text style={styles.navLink}>Builder</Text>
+              <Text style={styles.navLink}>Business</Text>
+              <Text style={styles.navLink}>Community</Text>
+              <Text style={styles.navLink}>Ecosystem</Text>
+              <Text style={styles.navLink}>Resources</Text>
+            </View>
+            <Pressable style={styles.ctaButton}>
+              <Text style={styles.ctaButtonText}>Let's build</Text>
+            </Pressable>
+          </>
+        ) : (
+          // Mobile View: Hamburger Menu
+          <Pressable>
+            <Text style={{ fontSize: 28, color: COLORS.darkText }}>☰</Text>
+          </Pressable>
+        )}
       </View>
     </View>
   );
@@ -35,6 +47,11 @@ const Header = () => {
 
 const styles = StyleSheet.create({
   headerContainer: {
+    position: 'absolute', // Fixa o cabeçalho no topo
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: 10, // Garante que ele fique sobreposto
     width: '100%',
     backgroundColor: COLORS.white,
     borderBottomWidth: 1,

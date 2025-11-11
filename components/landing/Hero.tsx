@@ -5,7 +5,7 @@ import { View, Text, StyleSheet, Pressable } from 'react-native';
 const COLORS = {
   primary: '#6A4CFF', // A vibrant purple for the main CTA
   darkText: '#333333',
-  lightText: '#555555',
+  lightText: '#4A4A4A', // Darkened for better contrast
   white: '#FFFFFF',
   borderColor: '#E0E0E0',
 };
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   title: {
-    fontSize: 56,
+    fontSize: 48, // Reduced from 56 for better balance
     fontWeight: 'bold',
     color: COLORS.darkText,
     textAlign: 'center',
@@ -57,15 +57,15 @@ const styles = StyleSheet.create({
     marginBottom: 32,
   },
   ctaButton: {
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.primary, // Changed for prominence
     paddingVertical: 14,
     paddingHorizontal: 28,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: COLORS.borderColor,
+    borderColor: COLORS.primary, // Match background
   },
   ctaButtonText: {
-    color: COLORS.darkText,
+    color: COLORS.white, // Changed for contrast
     fontSize: 16,
     fontWeight: 'bold',
   },

@@ -7,35 +7,32 @@ import Ecosystem from '../../components/landing/Ecosystem';
 import Community from '../../components/landing/Community';
 import LatestNews from '../../components/landing/LatestNews';
 import FinalCTA from '../../components/landing/FinalCTA';
+import Footer from '../../components/landing/Footer';
 
 const COLORS = {
   background: '#FFFFFF',
 };
 
+const HEADER_HEIGHT = 80;
+
 export default function WebHomeScreen() {
   return (
-    <ScrollView style={styles.container}>
-      {/* O novo, modern header */}
+    <View style={styles.container}>
       <Header />
 
-      {/* The main content area */}
-      <View style={styles.content}>
-        {/* The hero section with the main title */}
-        <Hero />
+      <ScrollView>
+        {/* Adiciona padding ao topo para não ficar atrás do header */}
+        <View style={styles.content}>
+          <Hero />
+          <Ecosystem />
+          <Community />
+          <LatestNews />
+          <FinalCTA />
+        </View>
 
-        {/* A seção de ecossistema com os cards */}
-        <Ecosystem />
-
-        {/* A seção da comunidade */}
-        <Community />
-
-        {/* A seção de últimas notícias */}
-        <LatestNews />
-
-        {/* A seção final de CTA */}
-        <FinalCTA />
-      </View>
-    </ScrollView>
+        <Footer />
+      </ScrollView>
+    </View>
   );
 }
 
@@ -47,5 +44,6 @@ const styles = StyleSheet.create({
   content: {
     alignItems: 'center',
     backgroundColor: COLORS.background,
+    paddingTop: HEADER_HEIGHT, // Evita que o conteúdo comece por baixo do cabeçalho
   },
 });

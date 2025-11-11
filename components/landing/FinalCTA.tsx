@@ -1,13 +1,13 @@
 
 import React from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient'; // Assuming expo-linear-gradient is installed
+import { LinearGradient } from 'expo-linear-gradient';
 
 const COLORS = {
   primary: '#6A4CFF',
   white: '#FFFFFF',
   darkText: '#333333',
-  lightText: '#F0F2F5',
+  lightText: '#555555', // Standardized light text color
 };
 
 const FinalCTA = () => {
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   },
   container: {
     width: '100%',
-    maxWidth: 1160, // max-width of the inner container
+    maxWidth: 1160, 
     alignItems: 'center',
     justifyContent: 'center',
     padding: 60,
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 18,
-    color: '#555',
+    color: COLORS.lightText, // Updated for consistency
     textAlign: 'center',
     lineHeight: 28,
     maxWidth: 650,
