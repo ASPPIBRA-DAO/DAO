@@ -6,8 +6,10 @@ const COLORS = {
   primary: '#007BFF',
   white: '#FFFFFF',
   darkText: '#343A40',
-  borderColor: '#DEE2E6',
-  overlay: 'rgba(0, 0, 0, 0.8)', // Fundo para o menu mobile
+  // Adicionando cores para o efeito de vidro
+  glassBackground: 'rgba(255, 255, 255, 0.8)',
+  glassBorder: 'rgba(255, 255, 255, 0.2)',
+  overlay: 'rgba(0, 0, 0, 0.5)', // Overlay um pouco mais claro
 };
 
 const Header = () => {
@@ -71,11 +73,18 @@ const Header = () => {
 const styles = StyleSheet.create({
   headerContainer: {
     width: '100%',
-    backgroundColor: COLORS.white,
+    position: 'fixed', // Fixo no topo
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: 1000,
+    backgroundColor: COLORS.glassBackground, // Fundo de vidro
     borderBottomWidth: 1,
-    borderColor: COLORS.borderColor,
+    borderColor: COLORS.glassBorder, // Borda de vidro
     alignItems: 'center',
     paddingVertical: 10,
+    // @ts-ignore - backdropFilter é uma propriedade web
+    backdropFilter: 'blur(10px)',
   },
   headerContent: {
     flexDirection: 'row',
@@ -90,7 +99,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: COLORS.darkText,
   },
-  // Estilos Desktop
   navContainer: {
     flexDirection: 'row',
     gap: 40,
@@ -111,7 +119,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
-  // Estilos Mobile
   hamburgerButton: {
       padding: 10,
   },
@@ -126,10 +133,12 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   mobileMenuContainer: {
-    backgroundColor: COLORS.white,
+    backgroundColor: 'rgba(255, 255, 255, 0.9)', // Fundo de vidro mais opaco
     width: '80%',
     height: '100%',
     padding: 40,
+    // @ts-ignore - backdropFilter é uma propriedade web
+    backdropFilter: 'blur(10px)',
   },
   closeButton: {
       alignSelf: 'flex-end',

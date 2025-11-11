@@ -15,31 +15,34 @@ const COLORS = {
 
 export default function WebHomeScreen() {
   return (
-    <ScrollView style={styles.container}>
-      {/* O novo, modern header */}
+    <View style={styles.container}>
+      {/* O Header agora está fora do ScrollView para ficar fixo no topo */}
       <Header />
 
-      {/* The main content area */}
-      <View style={styles.content}>
-        {/* The hero section with the main title */}
-        <Hero />
+      {/* O ScrollView contém todo o conteúdo que pode ser rolado */}
+      <ScrollView>
+        {/* Um container para o conteúdo principal com padding no topo */}
+        <View style={styles.content}>
+          {/* The hero section with the main title */}
+          <Hero />
 
-        {/* A seção de ecossistema com os cards */}
-        <Ecosystem />
+          {/* A seção de ecossistema com os cards */}
+          <Ecosystem />
 
-        {/* A seção da comunidade */}
-        <Community />
+          {/* A seção da comunidade */}
+          <Community />
 
-        {/* A seção de últimas notícias */}
-        <LatestNews />
+          {/* A seção de últimas notícias */}
+          <LatestNews />
 
-        {/* A seção final de CTA */}
-        <FinalCTA />
-      </View>
+          {/* A seção final de CTA */}
+          <FinalCTA />
+        </View>
 
-      {/* O novo rodapé */}
-      <Footer />
-    </ScrollView>
+        {/* O novo rodapé */}
+        <Footer />
+      </ScrollView>
+    </View>
   );
 }
 
@@ -51,5 +54,6 @@ const styles = StyleSheet.create({
   content: {
     alignItems: 'center',
     backgroundColor: COLORS.background,
+    paddingTop: 80, // Espaço para não sobrepor o conteúdo pelo Header
   },
 });
