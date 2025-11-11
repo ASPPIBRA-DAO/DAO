@@ -1,12 +1,13 @@
 
 import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import Header from '../../components/landing/Header';
-import Hero from '../../components/landing/Hero';
-import Ecosystem from '../../components/landing/Ecosystem';
-import Community from '../../components/landing/Community';
-import LatestNews from '../../components/landing/LatestNews';
-import FinalCTA from '../../components/landing/FinalCTA';
+import Header from '@/components/landing/Header';
+import Hero from '@/components/landing/Hero';
+import Ecosystem from '@/components/landing/Ecosystem';
+import Community from '@/components/landing/Community';
+import LatestNews from '@/components/landing/LatestNews';
+import FinalCTA from '@/components/landing/FinalCTA';
+import Footer from '@/components/landing/Footer';
 
 const COLORS = {
   background: '#FFFFFF',
@@ -35,6 +36,9 @@ export default function WebHomeScreen() {
         {/* A seção final de CTA */}
         <FinalCTA />
       </View>
+
+      {/* O novo rodapé */}
+      <Footer />
     </ScrollView>
   );
 }

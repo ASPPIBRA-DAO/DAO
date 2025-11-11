@@ -69,7 +69,7 @@ O projeto utiliza o **Expo Router**, que cria as rotas do aplicativo com base na
 
 - **Layout Raiz (`app/_layout.tsx`):** É o ponto de entrada da aplicação. Ele envolve todo o app com provedores de contexto, como o `ThemeProvider` para o tema claro/escuro.
 - **Navegação por Abas (`app/(tabs)/_layout.tsx`):** Este arquivo configura a `Tabs` navigator. Cada arquivo dentro de `(tabs)/` se torna uma aba. Ícones e nomes das abas são definidos aqui.
-- **Adicionando Novas Telas:** Para criar uma nova tela, simplesmente adicione um novo arquivo `.tsx` no diretório `app`. Por exemplo, criar `app/settings.tsx` irá automaticamente criar a rota `/settings`.
+- **Adicionando Novas Telas:** Para criar uma nova tela, simplesmente adicione um novo arquivo `.tsx` no diretório `app`. Por exemplo, criar `app/settings.tsx` irá automaticamente criar la rota `/settings`.
 - **Navegação Programática:** Para navegar entre as telas, utilize o hook `useRouter` do `expo-router`. Ex: `router.push('/settings')`.
 
 ---
@@ -88,27 +88,47 @@ Esta é a área principal do desenvolvimento. A maioria das funcionalidades deve
 - **`components/`**: Componentes de UI reutilizáveis (`Botão`, `Card`, `Input`).
 - **`hooks/` & `services/`**: **TODA** a lógica de negócio, estado e comunicação com APIs. Funções de busca de dados, validações e regras de negócio são universais por natureza.
 
-### 4.2. A Camada Específica (10% do Código)
+### 4.2. A Estratégia Correta para Componentes Web e Mobile
 
-Quando uma funcionalidade precisa de um tratamento diferente para web ou nativo, usamos as seguintes estratégias:
+Uma dúvida comum é: "Onde coloco meus componentes mobile e meus componentes web?". A resposta e a prática recomendada nesta arquitetura é: **você não terá diretórios separados.**
 
-#### A. Extensões de Arquivo Específicas
+Todos os componentes, sejam eles compartilhados ou específicos de uma plataforma, residem no mesmo diretório `/components`. A diferenciação é feita através de uma convenção de nomenclatura de arquivos, conhecida como **extensões de plataforma**.
 
-Crie arquivos com sufixos de plataforma. O sistema escolherá o correto automaticamente no momento da compilação.
+#### A. Usando Extensões de Plataforma (`.web.tsx`, `.native.tsx`)
 
-- `.native.tsx`: Apenas para iOS e Android.
-- `.web.tsx`: Apenas para a Web.
-- `.ios.tsx`: Apenas para iOS.
-- `.android.tsx`: Apenas para Android.
+Esta é a abordagem principal para criar componentes que têm implementações visuais ou funcionais diferentes entre a web e o mobile.
 
-**Exemplo de Uso:** Um componente `DatePicker`.
-- `components/DatePicker.native.tsx` usaria o componente nativo do sistema operacional.
-- `components/DatePicker.web.tsx` usaria uma biblioteca de calendário baseada em React para a web.
-- No seu código, você simplesmente importaria `from '@/components/DatePicker'`.
+1.  **Componente Padrão (Obrigatório):** Crie o componente principal que será usado como fallback ou para plataformas não especificadas.
+    - `components/MeuComponente.tsx`
 
-#### B. API `Platform`
+2.  **Especialização (Opcional):** Se necessário, crie versões específicas para web e/ou mobile no **mesmo diretório**.
+    - Para a **Web**: `components/MeuComponente.web.tsx`
+    - Para **Mobile (iOS e Android)**: `components/MeuComponente.native.tsx`
 
-Para pequenas diferenças dentro de um mesmo componente, use o módulo `Platform` do React Native.
+#### B. Como a Importação Funciona
+
+A "mágica" acontece no momento da importação e compilação. Ao usar o componente em uma tela, você **sempre** importará pelo nome base, sem a extensão:
+
+```tsx
+// Dentro de uma tela em /app/index.tsx, por exemplo
+import MeuComponente from '@/components/MeuComponente';
+```
+
+O sistema de build do Expo (Webpack para web, Metro para mobile) resolverá automaticamente qual arquivo usar:
+- Ao compilar para a **web**, ele prioriza `MeuComponente.web.tsx`.
+- Ao compilar para **iOS ou Android**, ele prioriza `MeuComponente.native.tsx`.
+- Se uma versão específica da plataforma não for encontrada, ele usará o arquivo padrão `MeuComponente.tsx`.
+
+**Exemplo Prático:** Um `SeletorDeData`.
+- `components/SeletorDeData.native.tsx` pode usar um componente de calendário nativo do iOS/Android para a melhor experiência do usuário.
+- `components/SeletorDeData.web.tsx` pode usar uma biblioteca de calendário React otimizada para navegadores.
+- Na sua tela de formulário, você apenas importa `SeletorDeData` e o sistema cuida do resto.
+
+Essa abordagem mantém o código organizado, co-localizando todas as variantes de um componente, e simplifica o desenvolvimento nas telas, que não precisam se preocupar com a plataforma em que estão rodando.
+
+#### C. API `Platform`
+
+Para pequenas diferenças dentro de um mesmo componente, use o módulo `Platform` do React Native. Esta é uma alternativa quando criar arquivos separados parece um exagero.
 
 **Exemplo de Uso:** Um botão de "Compartilhar".
 ```tsx
@@ -135,7 +155,7 @@ Para facilitar as decisões de desenvolvimento, a tabela abaixo detalha as estra
 
 | Funcionalidade | Plataforma(s) | Estratégia de Arquitetura | Exemplo de Implementação / Bibliotecas |
 | :--- | :--- | :--- | :--- |
-| **Autenticação com Carteira** | Todas | **Nativa (Prioritária) / Web (Alternativa)** | **Nativo:** Use `WalletConnectModal` da `@walletconnect/modal-react-native`. **Web:** Use a biblioteca da WalletConnect para web. A diferença será abstraída em um hook como `useWalletAuth.native.ts` e `useWalletAuth.web.ts`. |
+| **Autenticação com Carteira** | Todas | **Nativa (Prioritária) / Web (Alternativa)** | **Nativo:** Use `WalletConnectModal` da `@walletconnect/modal-react-native`. **Web:** Use la biblioteca da WalletConnect para web. A diferença será abstraída em um hook como `useWalletAuth.native.ts` e `useWalletAuth.web.ts`. |
 | **Feed de Propostas** | Todas | **Compartilhada** | Crie um componente `ProposalList.tsx` e uma tela `app/(tabs)/proposals.tsx`. A busca de dados será feita em um hook compartilhado `useProposals.ts` que busca os dados de uma API ou serviço de indexação (e.g., The Graph). |
 | **Detalhe e Votação de Proposta** | Todas | **Compartilhada** | Tela única `app/proposal/[id].tsx` que funciona em todas as plataformas. A lógica de votação (`useVote.ts`) chamará a função de interação com o contrato inteligente. |
 | **Interação com Smart Contract** | Todas | **Compartilhada (com especificidade)** | Use bibliotecas como `ethers.js` ou `viem`. A lógica de criar um provedor (provider) e um assinante (signer) pode ter pequenas diferenças. Use a API `Platform` ou um hook `useContract.ts` para abstrair a conexão com a carteira de cada plataforma. |

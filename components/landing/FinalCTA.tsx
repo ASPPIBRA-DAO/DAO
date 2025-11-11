@@ -22,7 +22,7 @@ const FinalCTA = () => {
           Build your vision with Nexera's powerful infrastructure, seamless interoperability, and compliance-ready solutions.
         </Text>
         <Pressable style={styles.ctaButton}>
-          <Text style={styles.ctaButtonText}>Let's build</Text>
+          <Text style={styles.ctaButtonText}>Let's Build</Text>
         </Pressable>
       </LinearGradient>
     </View>

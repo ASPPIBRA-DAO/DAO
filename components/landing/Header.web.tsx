@@ -3,30 +3,25 @@ import React from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 
 const COLORS = {
-  primary: '#6A4CFF', // A vibrant purple for the main CTA
-  lightGray: '#F0F2F5',
-  darkText: '#333333',
-  lightText: '#555555',
+  primary: '#007BFF', // Um azul para diferenciar da versão nativa
   white: '#FFFFFF',
-  borderColor: '#E0E0E0',
+  darkText: '#343A40',
+  borderColor: '#DEE2E6',
 };
 
 const Header = () => {
   return (
     <View style={styles.headerContainer}>
       <View style={styles.headerContent}>
-        <View style={styles.logoContainer}>
-          <Text style={styles.logo}>nexera</Text>
-        </View>
+        <Text style={styles.logo}>nexera (Web)</Text>
         <View style={styles.navContainer}>
-          <Text style={styles.navLink}>Builder</Text>
-          <Text style={styles.navLink}>Business</Text>
-          <Text style={styles.navLink}>Community</Text>
-          <Text style={styles.navLink}>Ecosystem</Text>
-          <Text style={styles.navLink}>Resources</Text>
+          <Text style={styles.navLink}>Home</Text>
+          <Text style={styles.navLink}>Sobre</Text>
+          <Text style={styles.navLink}>Propostas</Text>
+          <Text style={styles.navLink}>Contato</Text>
         </View>
         <Pressable style={styles.ctaButton}>
-          <Text style={styles.ctaButtonText}>Let's build</Text>
+          <Text style={styles.ctaButtonText}>Conectar Carteira</Text>
         </Pressable>
       </View>
     </View>
@@ -40,6 +35,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: COLORS.borderColor,
     alignItems: 'center',
+    paddingVertical: 10,
   },
   headerContent: {
     flexDirection: 'row',
@@ -48,23 +44,19 @@ const styles = StyleSheet.create({
     width: '100%',
     maxWidth: 1200,
     paddingHorizontal: 20,
-    height: 80,
-  },
-  logoContainer: {
-    // Logo styles
   },
   logo: {
-    fontSize: 24,
+    fontSize: 26,
     fontWeight: 'bold',
     color: COLORS.darkText,
   },
   navContainer: {
     flexDirection: 'row',
-    gap: 30,
+    gap: 40,
   },
   navLink: {
     fontSize: 16,
-    color: COLORS.lightText,
+    color: COLORS.darkText,
     fontWeight: '500',
   },
   ctaButton: {

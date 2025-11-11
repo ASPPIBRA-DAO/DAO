@@ -16,6 +16,12 @@ export const Colors = {
     icon: '#687076',
     tabIconDefault: '#687076',
     tabIconSelected: tintColorLight,
+    glassmorphism: {
+      backgroundColor: 'rgba(255, 255, 255, 0.2)',
+      borderRadius: 16,
+      borderColor: 'rgba(255, 255, 255, 0.3)',
+      borderWidth: 1,
+    },
   },
   dark: {
     text: '#ECEDEE',
@@ -24,6 +30,12 @@ export const Colors = {
     icon: '#9BA1A6',
     tabIconDefault: '#9BA1A6',
     tabIconSelected: tintColorDark,
+    glassmorphism: {
+      backgroundColor: 'rgba(0, 0, 0, 0.2)',
+      borderRadius: 16,
+      borderColor: 'rgba(0, 0, 0, 0.3)',
+      borderWidth: 1,
+    },
   },
 };
 
