@@ -72,7 +72,6 @@ const Ecosystem = () => {
             title="ASPPIBRA-DAO v 1.00"
             text="O Evergan v0.14 da Nexera é uma otimização de alta performance para dispositivos móveis, com página segura para relayers, acesso a help desk e um item avançado NRC-20 atualizável com o padrão ERC-20."
             cardColor={theme.card.backgroundDark}
-            image="https://placehold.co/600x400/1A1A1A/FFFFFF?text=ASPPIBRA-DAO"
             isDark
           >
             {/* Code Snippet Section */}
@@ -108,7 +107,7 @@ const Ecosystem = () => {
                   <Text>  secureRelay: </Text>
                   <Text style={{color: '#79B8FF'}}>true</Text>
                   { '\n'}
-                  <Text>});</Text>
+                  <Text>{'});'}</Text>
                 </Text>
               </View>
             </View>
@@ -120,6 +119,7 @@ const Ecosystem = () => {
              <ExpoImage
                 source={{ uri: 'https://storage.googleapis.com/nftimagebucket/bsc/tokens/0x7b8a01b39d58278b5de7e48c8449c9f4f5170613/TVRjMU1ETTVOakV6TWc9PV8xNzYyNzE=.svg' }}
                 style={styles.nftImage}
+                contentFit="contain"
             />
         </View>
       </View>
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
   card: {
     borderRadius: 16,
     padding: 28,
-    height: '100%',
+    height: 580,
     borderWidth: 1,
     borderColor: theme.border,
     flexDirection: 'column', // Ensure content inside flows downwards
