@@ -72,7 +72,7 @@ export default function TabTwoScreen() {
           what the user&apos;s current color scheme is, and so you can adjust UI colors accordingly.
         </ThemedText>
         <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemdText>
+          <ThemedText type="link">Learn more</ThemedText>
         </ExternalLink>
       </Collapsible>
       <Collapsible title="Animations">
