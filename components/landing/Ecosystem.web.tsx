@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, useWindowDimensions, TouchableOpacity, Platform } from 'react-native';
+import { Image as ExpoImage } from 'expo-image';
 
 const theme = {
   card: {
@@ -114,14 +115,12 @@ const Ecosystem = () => {
           </EcosystemCard>
         </View>
 
-        {/* Right Column */}
+        {/* Right Column - Updated to display SVG */}
         <View style={styles.rightColumn}>
-          <EcosystemCard
-            title="Indexação Completa e Relatórios"
-            text="O Evergan v0.13 possui indexação completa on-chain, recuperação de forma livre, relatórios de minting sem gás e cargas de trabalho auditadas para maior transparência e segurança."
-            cardColor={theme.card.backgroundDark}
-            isDark
-          />
+             <ExpoImage
+                source={{ uri: 'https://storage.googleapis.com/nftimagebucket/bsc/tokens/0x7b8a01b39d58278b5de7e48c8449c9f4f5170613/TVRjMU1ETTVOakV6TWc9PV8xNzYyNzE=.svg' }}
+                style={styles.nftImage}
+            />
         </View>
       </View>
     </View>
@@ -148,6 +147,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '100%',
     gap: 24,
+    alignItems: 'stretch', // Align items to have the same height
   },
   columnLayoutMobile: {
     flexDirection: 'column',
@@ -157,6 +157,7 @@ const styles = StyleSheet.create({
   },
   rightColumn: {
     flex: 1,
+    justifyContent: 'center',
   },
   card: {
     borderRadius: 16,
@@ -164,7 +165,7 @@ const styles = StyleSheet.create({
     height: '100%',
     borderWidth: 1,
     borderColor: theme.border,
-    flex: 1,
+    flexDirection: 'column', // Ensure content inside flows downwards
   },
   cardImage: {
     height: 200,
@@ -194,6 +195,8 @@ const styles = StyleSheet.create({
     backgroundColor: theme.codeBackground,
     borderWidth: 1,
     borderColor: theme.codeBorder,
+    flex: 1,
+    flexDirection: 'column', // content should be in a column
   },
   codeHeader: {
     flexDirection: 'row',
@@ -216,12 +219,18 @@ copyButtonText: {
   },
   codeBody: {
     padding: 16,
+    flex: 1,
   },
   codeText: {
     fontFamily: 'monospace',
     color: '#E6EDF3',
     fontSize: 14,
-  }
+  },
+  nftImage: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 16,
+  },
 });
 
 export default Ecosystem;
