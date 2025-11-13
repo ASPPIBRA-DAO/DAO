@@ -7,11 +7,10 @@ import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/navigation';
 
-// 1. IMPORTE O SEU TEMA GLOBAL
-import { COLORS, STYLES } from '../../src/styles/theme';
+// 1. CORRIGINDO A IMPORTAÇÃO PARA USAR O TEMA GLOBAL EXISTENTE
+import { Colors } from '../../constants/theme'; 
 
-// 2. O OBJETO DE CORES LOCAL FOI REMOVIDO
-
+// DADOS DAS NOTÍCIAS
 const newsItems = [
   {
     tag: 'ETHGlobal',
@@ -57,6 +56,7 @@ const newsItems = [
   },
 ];
 
+// O componente do cartão de notícias permanece o mesmo
 const NewsCard = ({ item }) => (
     <View style={styles.newsCard}>
         <Image source={{ uri: item.image }} style={styles.cardImage} />
@@ -102,6 +102,7 @@ const LatestNews = () => {
   );
 };
 
+// 2. ATUALIZANDO OS ESTILOS PARA USAR O OBJETO 'Colors'
 const styles = StyleSheet.create({
   container: {
     width: '100%',
@@ -109,19 +110,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
     paddingVertical: 80,
-    backgroundColor: COLORS.background, // Usando cor do tema
+    backgroundColor: Colors.light.background, // Usando a cor de fundo correta
     alignSelf: 'center',
   },
   title: {
     fontSize: 48,
     fontWeight: 'bold',
-    color: COLORS.text, // Usando cor do tema
+    color: Colors.light.text, // Usando a cor de texto correta
     marginBottom: 48,
     alignSelf: 'flex-start',
   },
   newsCard: {
-    ...STYLES.glassmorphism, // 3. APLICANDO O ESTILO DE VIDRO GLOBAL
-    borderRadius: 16, // Mantendo o border radius
+    backgroundColor: Colors.light.background, // Usando a cor de fundo do cartão
+    borderColor: Colors.light.tint, // Usando uma cor de borda do tema
+    borderWidth: 1,
+    borderRadius: 16,
     overflow: 'hidden',
     display: 'flex',
     flexDirection: 'column',
@@ -139,8 +142,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   cardTag: {
-    color: COLORS.tagText,
-    backgroundColor: COLORS.tagBackground,
+    color: Colors.light.tint, // Usando a cor de destaque do tema
+    backgroundColor: 'rgba(52, 199, 89, 0.1)', // Um fundo verde claro para a tag
     alignSelf: 'flex-start',
     paddingVertical: 4,
     paddingHorizontal: 12,
@@ -152,19 +155,19 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: COLORS.text, // Usando cor do tema
+    color: Colors.light.text, // Cor de texto
     marginBottom: 8,
   },
   cardText: {
     fontSize: 16,
-    color: COLORS.textSecondary, // Usando cor do tema
+    color: Colors.light.text, // Cor de texto
     marginBottom: 12,
     flex: 1, 
   },
   cardLink: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: COLORS.accent, // Usando cor do tema
+    color: Colors.light.tint, // Cor de destaque para o link
     marginTop: 'auto', 
   },
 });
