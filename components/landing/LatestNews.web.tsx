@@ -1,98 +1,103 @@
-
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import Slider from 'react-slick';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { EffectCoverflow, Navigation } from 'swiper/modules';
 
-const COLORS = {
-  darkText: '#333333',
-  lightText: '#555555',
-  white: '#FFFFFF',
-  borderColor: '#E0E0E0',
-  cardBackground: '#FFFFFF',
-  tagBackground: '#EFEBFF', // Light purple for tags
-  tagText: '#6A4CFF',
-};
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/navigation';
+
+// 1. IMPORTE O SEU TEMA GLOBAL
+import { COLORS, STYLES } from '../../src/styles/theme';
+
+// 2. O OBJETO DE CORES LOCAL FOI REMOVIDO
 
 const newsItems = [
   {
-    tag: 'Eventos',
+    tag: 'ETHGlobal',
     title: 'ASPFIBRA-DAO Apresenta o Cultiva Agro no ETHGlobal HackFS 2024',
     text: 'Integrando IPFS, DeFi, RWA e IA para fortalecer o financiamento descentralizado na produção agrícola.',
-    image: 'https://placehold.co/400x250/FFC107/FFFFFF?text=Notícia+1',
+    image: 'https://placehold.co/400x250/FFC107/FFFFFF?text=Cultiva+Agro',
     link: '#',
   },
   {
     tag: 'RWA / Parceria',
     title: 'ASPFIBRA-DAO e AAPOP lançam modelo de Agro Sustentável com Blockchain em Paraty',
-    text: 'Uma parceria para fortalecer a agricultura familiar e sustentável em Paraty, utilizando a tecnologia blockchain para garantir transparência e rastreabilidade.',
-    image: 'https://placehold.co/400x250/F44336/FFFFFF?text=Notícia+2',
+    text: 'Uma parceria para fortalecer a agricultura familiar e sustentável em Paraty, utilizando a tecnologia blockchain.',
+    image: 'https://placehold.co/400x250/F44336/FFFFFF?text=Parceria+AAPOP',
     link: '#',
   },
   {
-    tag: 'Parceria',
-    title: 'Nexera e GraphAI se unem para trazer consultas de IA Offchain...',
-    text: 'A colaboração visa permitir que contratos inteligentes consultem IAs de forma descentralizada e segura.',
-    image: 'https://placehold.co/400x250/2196F3/FFFFFF?text=Notícia+3',
+    tag: 'IA / Produto',
+    title: 'Cultiva Agro Lança Módulo de IA para Análise de Risco Agrícola',
+    text: 'A nova funcionalidade usa IA para análise preditiva de safras, otimizando o financiamento descentralizado.',
+    image: 'https://placehold.co/400x250/2196F3/FFFFFF?text=Módulo+IA',
     link: '#',
   },
   {
-    tag: 'Anúncio',
-    title: 'Lançamento Suave da Mainnet da Nexera Chain Já Disponível',
-    text: 'A nova mainnet promete maior escalabilidade e segurança para os aplicativos descentralizados da rede.',
-    image: 'https://placehold.co/400x250/9C27B0/FFFFFF?text=Notícia+4',
+    tag: 'Mainnet / Infra',
+    title: 'Mainnet da ASPFIBRA-DAO Chain Lançada: A Base do Cultiva Agro',
+    text: 'Nossa mainnet própria entra em operação, garantindo a escalabilidade e segurança para o Cultiva Agro.',
+    image: 'https://placehold.co/400x250/9C27B0/FFFFFF?text=Mainnet',
+    link: '#',
+  },
+  {
+    tag: 'Segurança / Auditoria',
+    title: 'Contratos do Cultiva Agro Auditados com Sucesso pela [Nome da Empresa]',
+    text: 'A [Nome da Empresa], líder em segurança, concluiu a auditoria, garantindo a proteção dos fundos e a integridade do protocolo para a pré-venda.',
+    image: 'https://placehold.co/400x250/4CAF50/FFFFFF?text=Auditoria+Concluída',
+    link: '#',
+  },
+  {
+    tag: 'DAO / Governança',
+    title: 'Governança da ASPFIBRA-DAO Ativada: Detentores de Token Votam na 1ª Proposta',
+    text: 'O portal de governança está no ar. Detentores do nosso token agora podem criar e votar em propostas que definem o futuro do ecossistema.',
+    image: 'https://placehold.co/400x250/FF9800/FFFFFF?text=Governança+Ativa',
     link: '#',
   },
 ];
 
 const NewsCard = ({ item }) => (
-  <View style={styles.newsCard}>
-    <Image source={{ uri: item.image }} style={styles.cardImage} />
-    <View style={styles.cardContent}>
-      <Text style={styles.cardTag}>{item.tag}</Text>
-      <Text style={styles.cardTitle}>{item.title}</Text>
-      <Text style={styles.cardText}>{item.text}</Text>
-      <Text style={styles.cardLink}>Leia mais →</Text>
+    <View style={styles.newsCard}>
+        <Image source={{ uri: item.image }} style={styles.cardImage} />
+        <View style={styles.cardContent}>
+            <Text style={styles.cardTag}>{item.tag}</Text>
+            <Text style={styles.cardTitle}>{item.title}</Text>
+            <Text style={styles.cardText}>{item.text}</Text>
+            <Text style={styles.cardLink}>Leia mais →</Text>
+        </View>
     </View>
-  </View>
 );
 
 const LatestNews = () => {
-  const settings = {
-    className: "center",
-    centerMode: true,
-    infinite: true,
-    centerPadding: "60px",
-    slidesToShow: 3,
-    speed: 500,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          centerPadding: "40px",
-        }
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 1,
-          centerPadding: "20px",
-        }
-      }
-    ]
-  };
-
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Últimas Notícias</Text>
       
-      <View style={styles.carouselContainer}>
-        <Slider {...settings}>
-          {newsItems.map((item, index) => (
-            <NewsCard key={index} item={item} />
-          ))}
-        </Slider>
-      </View>
+      <Swiper
+        effect={'coverflow'}
+        grabCursor={true}
+        centeredSlides={true}
+        slidesPerView={'auto'}
+        loop={true} 
+        initialSlide={3} 
+        coverflowEffect={{
+          rotate: 50,
+          stretch: 0,
+          depth: 100,
+          modifier: 1,
+          slideShadows: true,
+        }}
+        modules={[EffectCoverflow, Navigation]}
+        navigation={true}
+        style={{ width: '100%', paddingVertical: 50 }}
+      >
+        {newsItems.map((item, index) => (
+          <SwiperSlide key={index} style={{ width: 350, height: 500 }}>
+            <NewsCard item={item} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </View>
   );
 };
@@ -104,29 +109,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
     paddingVertical: 80,
-    backgroundColor: '#F9FAFB',
+    backgroundColor: COLORS.background, // Usando cor do tema
     alignSelf: 'center',
   },
   title: {
     fontSize: 48,
     fontWeight: 'bold',
-    color: COLORS.darkText,
+    color: COLORS.text, // Usando cor do tema
     marginBottom: 48,
     alignSelf: 'flex-start',
   },
-  carouselContainer: {
-    width: '100%',
-  },
   newsCard: {
-    backgroundColor: COLORS.cardBackground,
-    borderRadius: 16,
+    ...STYLES.glassmorphism, // 3. APLICANDO O ESTILO DE VIDRO GLOBAL
+    borderRadius: 16, // Mantendo o border radius
     overflow: 'hidden',
-    borderWidth: 1,
-    borderColor: COLORS.borderColor,
-    marginHorizontal: 15, // Add horizontal margin for spacing between cards
     display: 'flex',
     flexDirection: 'column',
-    height: 480, 
+    height: 480,
+    width: '100%',
   },
   cardImage: {
     width: '100%',
@@ -152,20 +152,20 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: COLORS.darkText,
+    color: COLORS.text, // Usando cor do tema
     marginBottom: 8,
   },
   cardText: {
     fontSize: 16,
-    color: COLORS.lightText,
+    color: COLORS.textSecondary, // Usando cor do tema
     marginBottom: 12,
-    flex: 1, // Allow text to take available space
+    flex: 1, 
   },
   cardLink: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: COLORS.darkText,
-    marginTop: 'auto', // Push to the bottom
+    color: COLORS.accent, // Usando cor do tema
+    marginTop: 'auto', 
   },
 });
 
