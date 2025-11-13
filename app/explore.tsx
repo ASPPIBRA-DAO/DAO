@@ -58,7 +58,7 @@ export default function TabTwoScreen() {
           different screen densities
         </ThemedText>
         <Image
-          source={require('@/assets/images/react-logo.png')}
+          source={require('@/assets/images/logo.png')}
           style={{ width: 100, height: 100, alignSelf: 'center' }}
         />
         <ExternalLink href="https://reactnative.dev/docs/images">
@@ -72,7 +72,7 @@ export default function TabTwoScreen() {
           what the user&apos;s current color scheme is, and so you can adjust UI colors accordingly.
         </ThemedText>
         <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
+          <ThemedText type="link">Learn more</ThemdText>
         </ExternalLink>
       </Collapsible>
       <Collapsible title="Animations">
