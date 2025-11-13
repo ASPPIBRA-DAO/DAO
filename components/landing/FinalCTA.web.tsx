@@ -19,12 +19,12 @@ const FinalCTA = () => {
         colors={theme.gradient.cta} // Cor do tema
         style={styles.container}
       >
-        <Text style={[styles.title, { fontSize: titleFontSize }]}>Construa o futuro com a Nexera</Text>
+        <Text style={[styles.title, { fontSize: titleFontSize }]}>Construa o Futuro, Hoje.</Text>
         <Text style={styles.subtitle}>
-          Construa sua visão com a infraestrutura poderosa da Nexera, interoperabilidade perfeita e soluções prontas para conformidade.
+          Com a ASPFIBRA-DAO, você não apenas investe, mas também participa ativamente da construção de uma infraestrutura descentralizada. Nosso <Text style={{fontWeight: 'bold'}}>Digital World v 1.0</Text> é a prova de que estamos prontos para Web3, DeFi, RWA e AI.
         </Text>
         <Pressable style={styles.ctaButton}>
-          <Text style={styles.ctaButtonText}>Vamos Construir</Text>
+          <Text style={styles.ctaButtonText}>Junte-se a Nós na Pré-Venda</Text>
         </Pressable>
       </LinearGradient>
     </View>
@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     maxWidth: 600,
     marginBottom: 24,
+    fontSize: 48,
   },
   subtitle: {
     fontSize: 18,
@@ -63,14 +64,14 @@ const styles = StyleSheet.create({
     marginBottom: 32,
   },
   ctaButton: {
-    backgroundColor: theme.primaryAlt, // Cor do tema (Roxo)
-    paddingVertical: 14,
-    paddingHorizontal: 28,
+    backgroundColor: '#7B3EFC',
+    paddingVertical: 15,
+    paddingHorizontal: 35,
     borderRadius: 8,
   },
   ctaButtonText: {
-    color: theme.textOnPrimary, // Cor do tema (Branco)
-    fontSize: 16,
+    color: 'white',
+    fontSize: 22,
     fontWeight: 'bold',
   },
 });

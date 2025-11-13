@@ -1,6 +1,7 @@
 
 import React from 'react';
-import { View, Text, StyleSheet, Pressable, useWindowDimensions, Image } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
+import Slider from 'react-slick';
 
 const COLORS = {
   darkText: '#333333',
@@ -14,26 +15,30 @@ const COLORS = {
 
 const newsItems = [
   {
-    tag: 'Produto',
-    title: 'Nexera x Evergon Lançamento v0.14: Prontidão para Dispositivos Móveis,...',
+    tag: 'Eventos',
+    title: 'ASPFIBRA-DAO Apresenta o Cultiva Agro no ETHGlobal HackFS 2024',
+    text: 'Integrando IPFS, DeFi, RWA e IA para fortalecer o financiamento descentralizado na produção agrícola.',
     image: 'https://placehold.co/400x250/FFC107/FFFFFF?text=Notícia+1',
     link: '#',
   },
   {
-    tag: 'Produto',
-    title: 'Nexera x Evergon Lançamento v0.13: Indexação Completa, Fractio...',
+    tag: 'RWA / Parceria',
+    title: 'ASPFIBRA-DAO e AAPOP lançam modelo de Agro Sustentável com Blockchain em Paraty',
+    text: 'Uma parceria para fortalecer a agricultura familiar e sustentável em Paraty, utilizando a tecnologia blockchain para garantir transparência e rastreabilidade.',
     image: 'https://placehold.co/400x250/F44336/FFFFFF?text=Notícia+2',
     link: '#',
   },
   {
     tag: 'Parceria',
     title: 'Nexera e GraphAI se unem para trazer consultas de IA Offchain...',
+    text: 'A colaboração visa permitir que contratos inteligentes consultem IAs de forma descentralizada e segura.',
     image: 'https://placehold.co/400x250/2196F3/FFFFFF?text=Notícia+3',
     link: '#',
   },
   {
     tag: 'Anúncio',
     title: 'Lançamento Suave da Mainnet da Nexera Chain Já Disponível',
+    text: 'A nova mainnet promete maior escalabilidade e segurança para os aplicativos descentralizados da rede.',
     image: 'https://placehold.co/400x250/9C27B0/FFFFFF?text=Notícia+4',
     link: '#',
   },
@@ -45,25 +50,48 @@ const NewsCard = ({ item }) => (
     <View style={styles.cardContent}>
       <Text style={styles.cardTag}>{item.tag}</Text>
       <Text style={styles.cardTitle}>{item.title}</Text>
+      <Text style={styles.cardText}>{item.text}</Text>
       <Text style={styles.cardLink}>Leia mais →</Text>
     </View>
   </View>
 );
 
 const LatestNews = () => {
-  const { width } = useWindowDimensions();
-  const isDesktop = width > 992;
+  const settings = {
+    className: "center",
+    centerMode: true,
+    infinite: true,
+    centerPadding: "60px",
+    slidesToShow: 3,
+    speed: 500,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          centerPadding: "40px",
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          centerPadding: "20px",
+        }
+      }
+    ]
+  };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Últimas Notícias</Text>
       
-      {/* TODO: Add filter buttons */}
-      
-      <View style={[styles.newsGrid, !isDesktop && styles.newsGridMobile]}>
-        {newsItems.map((item, index) => (
-          <NewsCard key={index} item={item} />
-        ))}
+      <View style={styles.carouselContainer}>
+        <Slider {...settings}>
+          {newsItems.map((item, index) => (
+            <NewsCard key={index} item={item} />
+          ))}
+        </Slider>
       </View>
     </View>
   );
@@ -76,7 +104,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
     paddingVertical: 80,
-    backgroundColor: '#F9FAFB', // A very light gray background for the section
+    backgroundColor: '#F9FAFB',
+    alignSelf: 'center',
   },
   title: {
     fontSize: 48,
@@ -85,22 +114,19 @@ const styles = StyleSheet.create({
     marginBottom: 48,
     alignSelf: 'flex-start',
   },
-  newsGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 24,
+  carouselContainer: {
     width: '100%',
   },
-  newsGridMobile: {
-    flexDirection: 'column',
-  },
   newsCard: {
-    flexBasis: 'calc(25% - 18px)', // For a 4-column layout with 24px gap
     backgroundColor: COLORS.cardBackground,
     borderRadius: 16,
     overflow: 'hidden',
     borderWidth: 1,
     borderColor: COLORS.borderColor,
+    marginHorizontal: 15, // Add horizontal margin for spacing between cards
+    display: 'flex',
+    flexDirection: 'column',
+    height: 480, 
   },
   cardImage: {
     width: '100%',
@@ -108,6 +134,9 @@ const styles = StyleSheet.create({
   },
   cardContent: {
     padding: 20,
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
   },
   cardTag: {
     color: COLORS.tagText,
@@ -124,13 +153,19 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: COLORS.darkText,
+    marginBottom: 8,
+  },
+  cardText: {
+    fontSize: 16,
+    color: COLORS.lightText,
     marginBottom: 12,
+    flex: 1, // Allow text to take available space
   },
   cardLink: {
     fontSize: 16,
     fontWeight: 'bold',
     color: COLORS.darkText,
-    marginTop: 'auto',
+    marginTop: 'auto', // Push to the bottom
   },
 });
 
