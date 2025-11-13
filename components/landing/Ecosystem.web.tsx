@@ -1,12 +1,10 @@
 
 import React from 'react';
 import { View, Text, StyleSheet, useWindowDimensions, Image } from 'react-native';
-import { Colors } from '@/constants/theme'; // Importa as cores centralizadas
+import { Colors } from '@/constants/theme';
 
-// Para simplificar, vamos usar o tema 'light' por enquanto.
 const theme = Colors.light;
 
-// Placeholder Card Component
 const EcosystemCard = ({ style, cardColor, title, text, image, isDark }) => (
   <View style={[styles.card, { backgroundColor: cardColor }, style]}>
     {image && <Image source={{ uri: image }} style={styles.cardImage} />}
@@ -22,10 +20,13 @@ const Ecosystem = () => {
 
   return (
     <View style={styles.container}>
+      {/* Title Added as requested */}
+      <Text style={styles.title}>Tokenomics</Text>
+      
+      {/* Original Card Structure Restored */}
       <View style={[styles.columnLayout, !isDesktop && styles.columnLayoutMobile]}>
-        {/* Coluna da Esquerda (Card Grande) */}
         <View style={styles.leftColumn}>
-          <EcosystemCard 
+          <EcosystemCard
             title="Lançamento Evergan v0.14"
             text="O Evergan v0.14 da Nexera é uma otimização de alta performance para dispositivos móveis, com página segura para relayers, acesso a help desk e um item avançado NRC-20 atualizável com o padrão ERC-20."
             cardColor={theme.card.backgroundDark}
@@ -34,9 +35,8 @@ const Ecosystem = () => {
           />
         </View>
 
-        {/* Coluna da Direita (Card Pequeno) */}
         <View style={styles.rightColumn}>
-          <EcosystemCard 
+          <EcosystemCard
             title="Indexação Completa e Relatórios"
             text="O Evergan v0.13 possui indexação completa on-chain, recuperação de forma livre, relatórios de minting sem gás e cargas de trabalho auditadas para maior transparência e segurança."
             cardColor={theme.card.backgroundDark}
@@ -52,10 +52,18 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     maxWidth: 1200,
-    alignItems: 'center',
+    alignSelf: 'center',
     paddingHorizontal: 20,
-    marginTop: -40, // Puxa a seção para cima, sobrepondo-se ao fundo do Hero
-    marginBottom: 60,
+    paddingVertical: 60,
+    backgroundColor: theme.background,
+  },
+  title: {
+    fontSize: 48,
+    fontWeight: 'bold',
+    color: theme.text,
+    marginBottom: 48,
+    textAlign: 'left',
+    alignSelf: 'flex-start',
   },
   columnLayout: {
     flexDirection: 'row',
@@ -87,7 +95,7 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: theme.textSecondary,
+    color: theme.card.text,
     marginBottom: 12,
   },
   cardText: {
@@ -99,7 +107,7 @@ const styles = StyleSheet.create({
   cardLink: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: theme.textSecondary,
+    color: theme.card.text,
     marginTop: 'auto',
   },
 });

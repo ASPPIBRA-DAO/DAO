@@ -5,7 +5,10 @@ import FinalCTA from './FinalCTA';
 import Footer from './Footer';
 import Header from './Header';
 import Hero from './Hero';
-import LatestNews from './LatestNews';
+import { FAQ } from './FAQ';
+import LatestNews from './LatestNews'; // Corrigido: importação default
+import { Roadmap } from './Roadmap';
+import { Team } from './Team';
 
 export {
     Community,
@@ -14,5 +17,8 @@ export {
     Footer,
     Header,
     Hero,
-    LatestNews
+    FAQ,
+    LatestNews,
+    Roadmap,
+    Team,
 }
