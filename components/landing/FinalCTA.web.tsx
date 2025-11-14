@@ -3,26 +3,26 @@ import React from 'react';
 import { View, Text, StyleSheet, Pressable, useWindowDimensions } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Colors } from '@/constants/theme';
-import { useRouter } from 'expo-router'; // Importa o useRouter
+import { useRouter } from 'expo-router';
+import Footer from './Footer.web'; // Importa o Footer
 
-// Para simplificar, vamos usar o tema 'light' por enquanto.
 const theme = Colors.light;
 
 const FinalCTA = () => {
   const { width } = useWindowDimensions();
   const isMobile = width < 768;
-  const router = useRouter(); // Instancia o router
+  const router = useRouter();
 
   const titleFontSize = isMobile ? 36 : 48;
 
   const handlePress = () => {
-    router.push('/payment'); // Navega para a tela de pagamento
+    router.push('/payment');
   };
 
   return (
     <View style={styles.outerContainer}>
       <LinearGradient
-        colors={theme.gradient.cta} // Cor do tema
+        colors={theme.gradient.cta}
         style={styles.container}
       >
         <Text style={[styles.title, { fontSize: titleFontSize }]}>Construa o Futuro, Hoje.</Text>
@@ -33,6 +33,7 @@ const FinalCTA = () => {
           <Text style={styles.ctaButtonText}>Junte-se a Nós na Pré-Venda</Text>
         </Pressable>
       </LinearGradient>
+      <Footer />
     </View>
   );
 };
@@ -40,8 +41,7 @@ const FinalCTA = () => {
 const styles = StyleSheet.create({
   outerContainer: {
     width: '100%',
-    paddingHorizontal: 20,
-    paddingVertical: 80,
+    alignItems: 'center', // Centraliza o Footer
   },
   container: {
     width: '100%',
@@ -52,10 +52,12 @@ const styles = StyleSheet.create({
     borderRadius: 24,
     overflow: 'hidden',
     alignSelf: 'center',
+    marginHorizontal: 20,
+    marginBottom: 80, // Adiciona espaço entre o CTA e o Footer
   },
   title: {
     fontWeight: 'bold',
-    color: theme.textSecondary, // Cor do tema
+    color: theme.textSecondary,
     textAlign: 'center',
     maxWidth: 600,
     marginBottom: 24,
@@ -63,7 +65,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 18,
-    color: theme.textTertiary, // Cor do tema
+    color: theme.textTertiary,
     textAlign: 'center',
     lineHeight: 28,
     maxWidth: 650,

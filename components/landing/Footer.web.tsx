@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
     borderColor: COLORS.borderColor,
     alignItems: 'center',
     paddingVertical: 20,
-    marginTop: 40,
   },
   footerContent: {
     width: '100%',

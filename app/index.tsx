@@ -6,7 +6,6 @@ import {
   Ecosystem,
   FAQ,
   FinalCTA,
-  Footer,
   Header,
   Hero,
   LatestNews,
@@ -32,7 +31,6 @@ export default function WebHomeScreen() {
           <FAQ />
           <FinalCTA />
         </View>
-        <Footer />
       </ScrollView>
     </View>
   );

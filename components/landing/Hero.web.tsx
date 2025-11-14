@@ -1,74 +1,136 @@
 
 import React from 'react';
-import { View, Text, StyleSheet, Pressable, useWindowDimensions } from 'react-native';
-import { Colors } from '@/constants/theme'; // Importa as cores centralizadas
+import { 
+  View, 
+  Text, 
+  StyleSheet, 
+  ImageBackground, 
+  Pressable 
+} from 'react-native';
+import { Colors } from '@/constants/theme'; // Caminho ajustado para consistência
 
-// Para simplificar, vamos usar o tema 'light' por enquanto.
-const theme = Colors.light;
+// --- NOTA: Coloque a URL da sua imagem de fundo aqui ---
+// (Sugestão: uma foto de cidade/campo do Brasil)
+const backgroundImage = { uri: 'https://images.unsplash.com/photo-1503221342240-6D83434d3e32?q=80&w=2670&auto=format&fit=crop' };
 
-const Hero = () => {
-  const { width } = useWindowDimensions();
-  const isMobile = width < 768;
-
-  const titleFontSize = isMobile ? 32 : 56;
-
+export default function Hero() {
   return (
-    <View style={styles.heroContainer}>
-      <Text style={styles.eyebrow}>ECOSSISTEMA</Text>
-      <Text style={[styles.title, { fontSize: titleFontSize }]}>Impulsionando um ecossistema dinâmico e em crescimento</Text>
-      <Text style={styles.subtitle}>
-        A ASPPIBRA-DAO potencializa um ecossistema próspero, conectando empresas, instituições e desenvolvedores para criar o futuro das aplicações baseadas em blockchain.
-      </Text>
-      <Pressable style={styles.ctaButton}>
-        <Text style={styles.ctaButtonText}>Explorar ecossistema</Text>
-      </Pressable>
+    <View style={styles.wrapper}>
+      <ImageBackground 
+        source={backgroundImage} 
+        style={styles.imageBackground} 
+        resizeMode="cover"
+      >
+        {/* Camada escura para dar contraste ao texto */}
+        <View style={styles.overlay} />
+
+        {/* Container do Conteúdo */}
+        <View style={styles.contentContainer}>
+          
+          <Text style={styles.title}>
+            Defendendo o Futuro da Propriedade no Brasil.
+          </Text>
+          
+          <Text style={styles.subtitle}>
+            Somos a associação que une proprietários de imóveis à segurança jurídica e à inovação tecnológica (Blockchain, DeFi e IA) para criar um setor imobiliário mais transparente, ágil e justo.
+          </Text>
+          
+          {/* Botões CTA */}
+          <View style={styles.buttonContainer}>
+            <Pressable style={[styles.button, styles.buttonPrimary]}>
+              <Text style={styles.buttonTextPrimary}>Associe-se Agora</Text>
+            </Pressable>
+            <Pressable style={[styles.button, styles.buttonSecondary]}>
+              <Text style={styles.buttonTextSecondary}>Conheça a Proposta</Text>
+            </Pressable>
+          </View>
+
+          {/* Prova Social */}
+          <Text style={styles.socialProof}>
+            Entidade sem fins lucrativos. Fundada em 2016. CNPJ: 26.325.396/0001-30
+          </Text>
+
+        </View>
+      </ImageBackground>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
-  heroContainer: {
-    paddingVertical: 80,
-    alignItems: 'center',
-    backgroundColor: theme.background, // Cor do tema
-    paddingHorizontal: 20,
+  wrapper: {
+    width: '100%',
+    backgroundColor: '#000', // Fundo de fallback caso a imagem falhe
   },
-  eyebrow: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: theme.primaryAlt, // Cor do tema (Roxo)
-    textTransform: 'uppercase',
-    letterSpacing: 1.5,
-    marginBottom: 16,
+  imageBackground: {
+    width: '100%',
+    // Este é o nosso "padrão de tamanho consistente" para o Hero
+    // (Altura automática baseada no padding)
+    paddingVertical: 180, // Aumente ou diminua para mais/menos altura
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'relative',
+  },
+  overlay: {
+    ...StyleSheet.absoluteFillObject, // Cobre todo o ImageBackground
+    backgroundColor: 'rgba(0, 0, 0, 0.6)', // Sobreposição escura (60%)
+  },
+  contentContainer: {
+    width: '100%',
+    maxWidth: 1200,
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    zIndex: 1, // Garante que o conteúdo fique sobre a camada 'overlay'
+    backgroundColor: 'transparent', // Garante que o iOS não tenha problemas
   },
   title: {
+    fontSize: 48,
     fontWeight: 'bold',
-    color: theme.textSecondary, // Cor do tema
+    color: '#FFFFFF',
     textAlign: 'center',
-    maxWidth: 800,
-    marginBottom: 24,
+    marginBottom: 16,
   },
   subtitle: {
     fontSize: 18,
-    color: theme.textTertiary, // Cor do tema
+    color: '#FFFFFF',
     textAlign: 'center',
     lineHeight: 28,
-    maxWidth: 650,
+    maxWidth: 700, // Limita a largura do subtítulo para melhor leitura
     marginBottom: 32,
   },
-  ctaButton: {
-    backgroundColor: theme.background, // Cor do tema (Branco)
-    paddingVertical: 14,
-    paddingHorizontal: 28,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: theme.border, // Cor do tema
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    flexWrap: 'wrap', // Permite que os botões quebrem a linha em telas pequenas
   },
-  ctaButtonText: {
-    color: theme.textSecondary, // Cor do tema
-    fontSize: 16,
+  button: {
+    paddingVertical: 14,
+    paddingHorizontal: 32,
+    borderRadius: 8,
+    margin: 8,
+    borderWidth: 2,
+    borderColor: 'transparent',
+  },
+  buttonPrimary: {
+    backgroundColor: Colors.light.tint, // Cor de destaque do seu tema
+    borderColor: Colors.light.tint,
+  },
+  buttonTextPrimary: {
+    color: '#FFFFFF',
     fontWeight: 'bold',
+    fontSize: 16,
+  },
+  buttonSecondary: {
+    backgroundColor: 'transparent',
+    borderColor: '#FFFFFF',
+  },
+  buttonTextSecondary: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  socialProof: {
+    fontSize: 14,
+    color: 'rgba(255, 255, 255, 0.7)', // Cor branca com 70% de opacidade
+    marginTop: 32,
   },
 });
-
-export default Hero;
