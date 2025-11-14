@@ -1,122 +1,174 @@
 
 import React from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
-import { Colors } from '@/constants/theme';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
 
-const theme = Colors.light;
-
-const roadmapData = [
+// Usando os mesmos dados da versão web para consistência
+const timelineData = [
   {
-    quarter: 'Q4 2025',
-    milestones: [
-      '✅ Lançamento do Projeto Cultiva Agro',
-      '✅ Auditoria de Contrato Concluída',
-      '🚀 Início da Pré-Venda',
-    ],
+    id: 1,
+    year: '2024',
+    color: '#f39c12',
+    title: 'YOUR TITLE',
+    text: "Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.",
   },
   {
-    quarter: 'Q1 2026',
-    milestones: [
-      '🏦 Listagem em Exchanges (CEX/DEX)',
-      '🗳️ Ativação Total da Governança da DAO',
-      '🤝 Expansão de Parcerias RWA',
-    ],
+    id: 2,
+    year: '2025',
+    color: '#e74c3c',
+    title: 'YOUR TITLE',
+    text: "Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.",
   },
   {
-    quarter: 'Q2 2026',
-    milestones: [
-      '📈 Lançamento do Módulo 2.0 (Staking / Financiamento com IA)',
-      '🌐 Expansão para novas cadeias (multi-chain)',
-    ],
+    id: 3,
+    year: '2026',
+    color: '#2ecc71',
+    title: 'YOUR TITLE',
+    text: "Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.",
+  },
+  {
+    id: 4,
+    year: '2027',
+    color: '#3498db',
+    title: 'YOUR TITLE',
+    text: "Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.",
+  },
+  {
+    id: 5,
+    year: '2028',
+    color: '#9b59b6',
+    title: 'YOUR TITLE',
+    text: "Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.",
+  },
+  {
+    id: 6,
+    year: '2029',
+    color: '#1abc9c',
+    title: 'YOUR TITLE',
+    text: "Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.",
   },
 ];
 
-const RoadmapItem = ({ item, isLast }) => (
+// Componente para cada item da timeline vertical
+const TimelineItem = ({ item, isLast }) => (
   <View style={styles.itemContainer}>
     <View style={styles.lineArea}>
-      <View style={styles.dot} />
+      {/* O ponto, agora usando a cor do item */}
+      <View style={[styles.dot, { backgroundColor: item.color, borderColor: item.color }]} />
+      {/* A linha vertical, que não aparece no último item */}
       {!isLast && <View style={styles.line} />}
     </View>
-    <View style={[styles.card, theme.glassmorphism]}>
-      <Text style={styles.quarter}>{item.quarter}</Text>
-      {item.milestones.map((milestone, index) => (
-        <Text key={index} style={styles.milestone}>{
-          milestone
-        }</Text>
-      ))}
+    <View style={[styles.card, { borderColor: item.color }]}>
+      <Text style={styles.year}>{item.year}</Text>
+      <Text style={styles.cardTitle}>{item.title}</Text>
+      <Text style={styles.cardText}>{item.text}</Text>
+      {/* O número, estilizado de forma similar à web */}
+      <View style={[styles.cardNumber, { backgroundColor: item.color }]}>
+        <Text style={styles.cardNumberText}>{item.id}</Text>
+      </View>
     </View>
   </View>
 );
 
+// Componente principal do Roadmap Nativo
 export function Roadmap() {
   return (
-    <ThemedView style={styles.container}>
-      <ThemedText style={styles.title}>Roadmap</ThemedText>
+    <View style={styles.container}>
+      <Text style={styles.mainTitle}>Roadmap</Text>
       <FlatList
-        data={roadmapData}
-        keyExtractor={(item) => item.quarter}
+        data={timelineData}
+        keyExtractor={(item) => item.id.toString()}
         renderItem={({ item, index }) => (
-          <RoadmapItem item={item} isLast={index === roadmapData.length - 1} />
+          <TimelineItem item={item} isLast={index === timelineData.length - 1} />
         )}
+        contentContainerStyle={{ paddingHorizontal: 20 }}
       />
-    </ThemedView>
+    </View>
   );
 }
 
+// Estilos para o componente nativo
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
-    paddingVertical: 48,
-    paddingHorizontal: 24,
-    alignItems: 'center',
-    backgroundColor: theme.background,
+    flex: 1,
+    backgroundColor: '#f7f7f7',
+    paddingVertical: 50,
   },
-  title: {
+  mainTitle: {
     fontSize: 32,
-    fontWeight: 'bold',
-    color: theme.text,
+    fontWeight: '700',
+    color: '#333',
+    textAlign: 'center',
     marginBottom: 40,
   },
   itemContainer: {
     flexDirection: 'row',
-    width: '100%',
-    maxWidth: 800,
-    marginBottom: 20,
+    marginBottom: 30,
   },
   lineArea: {
     alignItems: 'center',
-    marginRight: 20,
+    marginRight: 15,
   },
   dot: {
-    width: 16,
-    height: 16,
-    borderRadius: 8,
-    backgroundColor: 'gold', // Cor Dourada
+    width: 20,
+    height: 20,
+    borderRadius: 10,
     borderWidth: 2,
-    borderColor: theme.primary,
+    zIndex: 1,
   },
   line: {
     flex: 1,
-    width: 2,
-    backgroundColor: theme.primary,
+    width: 3,
+    backgroundColor: '#ddd',
+    marginTop: -2, // Leve sobreposição para conectar com o ponto
   },
   card: {
     flex: 1,
+    backgroundColor: '#fff',
+    borderWidth: 3,
+    borderRadius: 15,
     padding: 20,
-    borderRadius: 16,
+    position: 'relative',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 3,
+    paddingTop: 30, // Espaço para o número
   },
-  quarter: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    color: theme.text,
-    marginBottom: 12,
+  year: {
+    fontSize: 20,
+    fontWeight: '700',
+    color: '#555',
+    marginBottom: 10,
   },
-  milestone: {
-    fontSize: 16,
-    color: theme.textSecondary,
+  cardTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#333',
     marginBottom: 8,
-    lineHeight: 22,
+  },
+  cardText: {
+    fontSize: 14,
+    color: '#666',
+    lineHeight: 20,
+  },
+  cardNumber: {
+    position: 'absolute',
+    top: -18,
+    left: '50%',
+    transform: [{ translateX: -18 }],
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 4,
+  },
+  cardNumberText: {
+    color: '#fff',
+    fontWeight: '600',
+    fontSize: 16,
   },
 });
+
+export default Roadmap;

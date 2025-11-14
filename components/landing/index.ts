@@ -6,8 +6,8 @@ import Footer from './Footer';
 import Header from './Header';
 import Hero from './Hero';
 import { FAQ } from './FAQ';
-import LatestNews from './LatestNews'; // Corrigido: importação default
-import { Roadmap } from './Roadmap';
+import LatestNews from './LatestNews'; 
+import Roadmap from './Roadmap'; // CORREÇÃO APLICADA AQUI
 import { Team } from './Team';
 
 export {
@@ -19,6 +19,6 @@ export {
     Hero,
     FAQ,
     LatestNews,
-    Roadmap,
+    Roadmap, // E AQUI
     Team,
 }
