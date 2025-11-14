@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Pressable, useWindowDimensions, Modal } from 'react-native';
+import { useRouter } from 'expo-router';
 import { Colors } from '@/constants/theme'; // Importa as cores centralizadas
 
 // Para simplificar, vamos usar o tema 'light' por enquanto.
@@ -10,6 +11,11 @@ const Header = () => {
   const { width } = useWindowDimensions();
   const isMobile = width < 768;
   const [menuOpen, setMenuOpen] = useState(false);
+  const router = useRouter();
+
+  const openPaymentModal = () => {
+    router.push('/payment');
+  };
 
   const DesktopNav = () => (
     <>
@@ -19,8 +25,8 @@ const Header = () => {
         <Text style={styles.navLink}>Propostas</Text>
         <Text style={styles.navLink}>Contato</Text>
       </View>
-      <Pressable style={styles.ctaButton} accessibilityLabel="Conectar Carteira" accessibilityRole="button">
-        <Text style={styles.ctaButtonText}>Conectar Carteira</Text>
+      <Pressable onPress={openPaymentModal} style={styles.ctaButton} accessibilityLabel="Abrir pagamento" accessibilityRole="button">
+        <Text style={styles.ctaButtonText}>Pagar</Text>
       </Pressable>
     </>
   );
@@ -45,8 +51,16 @@ const Header = () => {
                 <Text style={styles.mobileNavLink} onPress={() => setMenuOpen(false)}>Sobre</Text>
                 <Text style={styles.mobileNavLink} onPress={() => setMenuOpen(false)}>Propostas</Text>
                 <Text style={styles.mobileNavLink} onPress={() => setMenuOpen(false)}>Contato</Text>
-                 <Pressable style={[styles.ctaButton, { marginTop: 30 }]} accessibilityLabel="Conectar Carteira" accessibilityRole="button">
-                    <Text style={styles.ctaButtonText}>Conectar Carteira</Text>
+                 <Pressable 
+                   onPress={() => {
+                     setMenuOpen(false);
+                     openPaymentModal();
+                   }}
+                   style={[styles.ctaButton, { marginTop: 30 }]} 
+                   accessibilityLabel="Abrir pagamento" 
+                   accessibilityRole="button"
+                 >
+                    <Text style={styles.ctaButtonText}>Pagar</Text>
                 </Pressable>
             </View>
         </Pressable>

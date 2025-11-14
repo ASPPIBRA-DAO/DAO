@@ -21,6 +21,7 @@ export default function RootLayout() {
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="explore" options={{ headerShown: false }} />
         <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
+        <Stack.Screen name="payment" options={{ presentation: 'modal', title: 'Pagamento' }} />
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>
