@@ -59,7 +59,7 @@ const Community = () => {
           color={theme.card.community.lightPink}
           url="https://www.linkedin.com/company/asppibra-dao/"
           ctaText="Conectar →"
-          iconUrl="https://simpleicons.org/icons/linkedin.svg"
+          iconUrl="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg"
         />
         <CommunityCard
           name="Comunidade (BR)"
