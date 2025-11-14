@@ -39,9 +39,9 @@ const Community = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.eyebrow}>COMUNIDADE</Text>
-      <Text style={[styles.title, { fontSize: titleFontSize }]}>Uma comunidade moldando o futuro, juntos</Text>
+      <Text style={[styles.title, { fontSize: titleFontSize }]}>Conectando Mentes, Defendendo Direitos.</Text>
       <Text style={styles.subtitle}>
-        Construtores, investidores e contribuidores estão impulsionando a inovação em blockchain na ASPPIBRA-DAO. Junte-se à conversa, compartilhe ideias e participe da governança.
+        Seja você um proprietário de imóvel, um especialista jurídico, um investidor ou um entusiasta de tecnologia, este é o seu lugar. Conecte-se com os pioneiros que estão redesenhando o futuro do mercado imobiliário brasileiro. Participe das discussões, contribua com propostas e ajude a fortalecer nossa governança.
       </Text>
 
       <View style={[styles.cardGrid, !isDesktop && styles.cardGridMobile]}>
